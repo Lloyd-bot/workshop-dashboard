@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -25 45 45" width="500" height="500" shape-rendering="crispEdges">
+<defs><style>
+  .breathe{transform-origin:7.5px 13px;animation:breathe 1.2s infinite ease-in-out}
+  .bob{transform-origin:7.5px 15px;animation:bob 1.2s infinite ease-in-out}
+  .shad{transform-origin:7.5px 15.5px;animation:shad 1.2s infinite ease-in-out}
+  .arm-l{transform-origin:2px 10px;animation:arm-l 1.2s infinite ease-in-out}
+  .arm-r{transform-origin:14px 10px;animation:arm-r 1.2s infinite ease-in-out}
+  .eyes{transform-origin:7.5px 9px;animation:eyes-happy 1.2s infinite}
+  .conf{opacity:0}
+  .c1{animation:conf 1s 0s infinite}
+  .c2{animation:conf 1s -.2s infinite}
+  .c3{animation:conf 1s -.4s infinite}
+  .c4{animation:conf 1s -.6s infinite}
+  .c5{animation:conf 1s -.8s infinite}
+  .c6{animation:conf 1.3s -.1s infinite}
+  .c7{animation:conf 1.3s -.5s infinite}
+  .c8{animation:conf 1.3s -.9s infinite}
+  @keyframes breathe{0%,100%{transform:scale(1,1)}50%{transform:scale(1.04,.96) translate(0,.3px)}}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.5px)}}
+  @keyframes shad{0%,100%{transform:scaleX(1);opacity:.5}50%{transform:scaleX(.9);opacity:.4}}
+  @keyframes arm-l{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-30deg)}}
+  @keyframes arm-r{0%,100%{transform:rotate(0deg)}50%{transform:rotate(30deg)}}
+  @keyframes eyes-happy{0%,100%{transform:scaleY(1)}50%{transform:scaleY(0.3)}}
+  @keyframes conf{
+    0%{opacity:0;transform:translate(0,0) rotate(0deg)}
+    10%{opacity:1}
+    80%{opacity:.8;transform:translate(var(--cx),var(--cy)) rotate(var(--cr))}
+    100%{opacity:0;transform:translate(var(--cx),var(--cy)) rotate(var(--cr))}
+  }
+</style></defs>
+
+<rect class="shad" x="3" y="15" width="9" height="1" fill="#000" opacity=".5"/>
+
+<!-- Confetti particles -->
+<rect class="conf c1" x="5" y="-5" width="1.5" height="1.5" fill="#F44336" style="--cx:-8px;--cy:-12px;--cr:45deg"/>
+<rect class="conf c2" x="8" y="-8" width="1.5" height="1.5" fill="#2196F3" style="--cx:5px;--cy:-14px;--cr:-60deg"/>
+<rect class="conf c3" x="10" y="-4" width="1.2" height="1.2" fill="#FFEB3B" style="--cx:8px;--cy:-10px;--cr:30deg"/>
+<rect class="conf c4" x="4" y="-7" width="1.2" height="1.2" fill="#4CAF50" style="--cx:-10px;--cy:-8px;--cr:-45deg"/>
+<rect class="conf c5" x="12" y="-6" width="1.5" height="1.5" fill="#FF9800" style="--cx:9px;--cy:-12px;--cr:90deg"/>
+<rect class="conf c6" x="6" y="-10" width="1" height="1" fill="#E91E63" style="--cx:-5px;--cy:-15px;--cr:120deg"/>
+<rect class="conf c7" x="9" y="-3" width="1" height="1" fill="#9C27B0" style="--cx:12px;--cy:-9px;--cr:-30deg"/>
+<rect class="conf c8" x="3" y="-4" width="1.2" height="1.2" fill="#00BCD4" style="--cx:-12px;--cy:-11px;--cr:75deg"/>
+
+<!-- Legs (bouncing up) -->
+<g class="bob" fill="#DE886D">
+  <rect x="3" y="13" width="1" height="2"/>
+  <rect x="5" y="13" width="1" height="2"/>
+  <rect x="9" y="13" width="1" height="2"/>
+  <rect x="11" y="13" width="1" height="2"/>
+</g>
+
+<!-- Body -->
+<g class="bob"><g class="breathe">
+  <rect x="2" y="6" width="11" height="7" fill="#DE886D"/>
+  <!-- Happy squint eyes -->
+  <g class="eyes" fill="#000">
+    <rect x="4" y="9" width="1" height="2"/>
+    <rect x="10" y="9" width="1" height="2"/>
+  </g>
+</g></g>
+
+<!-- Left arm raised up -->
+<g class="bob"><g class="breathe">
+  <g class="arm-l"><rect x="0" y="9" width="2" height="2" fill="#DE886D"/></g>
+</g></g>
+
+<!-- Right arm raised up -->
+<g class="bob"><g class="breathe">
+  <g class="arm-r"><rect x="13" y="9" width="2" height="2" fill="#DE886D"/></g>
+</g></g>
+</svg>

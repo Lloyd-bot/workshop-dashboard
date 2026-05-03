@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -25 45 45" width="500" height="500" shape-rendering="crispEdges">
+<defs><style>
+  .breathe{transform-origin:7.5px 13px;animation:breathe 3.2s infinite ease-in-out}
+  .blink{transform-origin:7.5px 9px;animation:blink 4s infinite}
+  .bob{transform-origin:7.5px 15px;animation:bob 1.8s infinite ease-in-out}
+  .shad{transform-origin:7.5px 15.5px;animation:shad 1.8s infinite ease-in-out}
+  .arm-l{transform-origin:2px 10px;animation:arm-l 1.8s infinite ease-in-out}
+  .arm-r{transform-origin:14px 10px;animation:arm-r 1.8s infinite ease-in-out}
+  .body-tug{transform-origin:7.5px 15px;animation:tug 1.8s infinite ease-in-out}
+  .eyes{animation:eyes-pull 1.8s infinite ease-in-out}
+  .weed{animation:weed-pull 1.8s infinite ease-in-out}
+  .dirt{opacity:0}
+  .dt1{animation:dirt-fly 1.8s .7s infinite}
+  .dt2{animation:dirt-fly 1.8s .9s infinite}
+  .dt3{animation:dirt-fly 1.8s 1.1s infinite}
+  @keyframes breathe{0%,100%{transform:scale(1,1) translate(0,0)}50%{transform:scale(1.02,.98) translate(0,.4px)}}
+  @keyframes blink{0%,8%,100%{transform:scaleY(1)}4%{transform:scaleY(0.1)}}
+  @keyframes bob{0%,100%{transform:translateY(0)}40%,55%{transform:translateY(-2px)}70%{transform:translateY(1px)}}
+  @keyframes shad{0%,100%{transform:scaleX(1);opacity:.5}50%{transform:scaleX(.9);opacity:.42}70%{transform:scaleX(1.05);opacity:.55}}
+  @keyframes arm-l{0%,100%{transform:rotate(20deg)}40%,55%{transform:rotate(-50deg)}}
+  @keyframes arm-r{0%,100%{transform:rotate(-20deg)}40%,55%{transform:rotate(50deg)}}
+  @keyframes tug{0%,30%{transform:translateY(0) scaleY(1)}40%,55%{transform:translateY(-1.5px) scaleY(1.05)}65%{transform:translateY(.5px) scaleY(.97)}100%{transform:translateY(0) scaleY(1)}}
+  @keyframes eyes-pull{0%,30%{transform:translate(0,1px)}40%,55%{transform:translate(0,-0.5px)}}
+  @keyframes weed-pull{0%,30%{transform:translateY(0)}40%,55%{transform:translateY(-4px)}56%,100%{transform:translateY(0)}}
+  @keyframes dirt-fly{0%{opacity:0;transform:translate(0,0)}15%{opacity:.9}80%{opacity:0;transform:translate(var(--dx),var(--dy))}100%{opacity:0}}
+</style></defs>
+
+<rect class="shad" x="3" y="15" width="9" height="1" fill="#000" opacity=".5"/>
+
+
+<!-- Weeds in ground (multiple) -->
+<!-- Left weed (static) -->
+<rect x="-2" y="10" width="1" height="4" fill="#558B2F"/>
+<rect x="-3" y="8.5" width="2" height="2" fill="#66BB6A"/>
+<rect x="-1" y="9" width="2" height="2" fill="#7CB342"/>
+<!-- Right weed (static) -->
+<rect x="17" y="10" width="1" height="4" fill="#558B2F"/>
+<rect x="16.5" y="8.5" width="2.5" height="2" fill="#66BB6A"/>
+
+<!-- Centre weed being pulled -->
+<g class="weed">
+  <rect x="6.5" y="10" width="2" height="4" fill="#33691E"/>
+  <rect x="5" y="7.5" width="3" height="2.5" fill="#558B2F"/>
+  <rect x="7.5" y="8" width="3" height="2.5" fill="#7CB342"/>
+  <rect x="6" y="6.5" width="2.5" height="2" fill="#8BC34A"/>
+  <!-- Roots -->
+  <rect x="6.5" y="14" width="1" height="1.5" fill="#795548"/>
+  <rect x="5.5" y="14.5" width="1" height="1" fill="#6D4C41"/>
+  <rect x="8" y="14.5" width="1" height="1" fill="#6D4C41"/>
+</g>
+
+<!-- Dirt particles when weed pops out -->
+<g fill="#795548">
+  <rect class="dirt dt1" x="7" y="14" width="1.5" height="1.5" style="--dx:-5px;--dy:-4px"/>
+  <rect class="dirt dt2" x="7.5" y="14" width="1" height="1" style="--dx:5px;--dy:-5px"/>
+  <rect class="dirt dt3" x="6.5" y="14" width="1.2" height="1.2" style="--dx:-3px;--dy:-6px"/>
+</g>
+
+<!-- Legs (squatting) -->
+<g class="bob" fill="#DE886D">
+  <rect x="3" y="13" width="1" height="2"/>
+  <rect x="5" y="13" width="1" height="2"/>
+  <rect x="9" y="13" width="1" height="2"/>
+  <rect x="11" y="13" width="1" height="2"/>
+</g>
+
+<!-- Body (tugging) -->
+<g class="bob"><g class="body-tug"><g class="breathe">
+  <rect x="2" y="6" width="11" height="7" fill="#DE886D"/>
+  <g class="eyes"><g class="blink" fill="#000">
+    <rect x="4" y="8" width="1" height="2"/>
+    <rect x="10" y="8" width="1" height="2"/>
+  </g></g>
+</g></g></g>
+
+<!-- Left arm (pulls weed) -->
+<g class="bob"><g class="breathe">
+  <g class="arm-l"><rect x="0" y="9" width="2" height="2" fill="#DE886D"/></g>
+</g></g>
+
+<!-- Right arm (pulls weed) -->
+<g class="bob"><g class="breathe">
+  <g class="arm-r"><rect x="13" y="9" width="2" height="2" fill="#DE886D"/></g>
+</g></g>
+</svg>

@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -25 45 45" width="500" height="500" shape-rendering="crispEdges">
+<defs><style>
+  .breathe{transform-origin:7.5px 13px;animation:breathe 3.2s infinite ease-in-out}
+  .blink{transform-origin:7.5px 9px;animation:blink 4s infinite}
+  .shad{transform-origin:7.5px 15.5px;animation:shad .4s infinite ease-in-out}
+  .body-lean{transform-origin:7.5px 15px;animation:lean .4s infinite ease-in-out}
+  .arm-l{transform-origin:2px 10px;animation:hold .4s infinite ease-in-out}
+  .arm-r{transform-origin:14px 10px;animation:saw .4s infinite ease-in-out}
+  .eyes{animation:eyes-saw 5s infinite ease-in-out}
+  .dust{opacity:0}
+  .d1{animation:sawdust .5s 0s infinite}
+  .d2{animation:sawdust .5s -.18s infinite}
+  .d3{animation:sawdust .5s -.36s infinite}
+  @keyframes breathe{0%,100%{transform:scale(1,1) translate(0,0)}50%{transform:scale(1.02,.98) translate(0,.4px)}}
+  @keyframes blink{0%,8%,100%{transform:scaleY(1)}4%{transform:scaleY(0.1)}}
+  @keyframes shad{0%,100%{transform:scaleX(1.02);opacity:.52}50%{transform:scaleX(.98);opacity:.48}}
+  @keyframes lean{0%,100%{transform:translateX(.4px)}50%{transform:translateX(-.3px)}}
+  @keyframes saw{0%,100%{transform:rotate(-10deg)}50%{transform:rotate(14deg)}}
+  @keyframes hold{0%,100%{transform:rotate(20deg)}50%{transform:rotate(24deg)}}
+  @keyframes eyes-saw{0%,100%{transform:translate(1.5px,.8px)}50%{transform:translate(1.8px,.9px)}}
+  @keyframes sawdust{0%{opacity:0;transform:translate(0,0)}20%{opacity:.9}80%{opacity:0;transform:translate(5px,-4px)}100%{opacity:0}}
+</style></defs>
+
+<rect class="shad" x="3" y="15" width="9" height="1" fill="#000" opacity=".5"/>
+
+<!-- Workbench -->
+<rect x="13" y="13.5" width="16" height="1.5" fill="#5D4037"/>
+<rect x="13" y="15" width="16" height=".5" fill="#4E342E"/>
+<!-- Plank on bench -->
+<rect x="14" y="11.5" width="14" height="2.2" fill="#8D6E63"/>
+<rect x="14" y="11.5" width="14" height=".4" fill="#A1887F"/>
+<!-- Wood grain -->
+<rect x="15" y="12.2" width="12" height=".3" fill="#795548" opacity=".5"/>
+<rect x="15" y="12.8" width="12" height=".3" fill="#795548" opacity=".5"/>
+<!-- Cut line on plank -->
+<rect x="19" y="11.5" width=".5" height="2.2" fill="#4E342E"/>
+
+<!-- Sawdust particles at cut point -->
+<g fill="#BCAAA4">
+  <rect class="dust d1" x="19" y="11.5" width="1" height="1"/>
+  <rect class="dust d2" x="19.5" y="11.5" width=".8" height=".8"/>
+  <rect class="dust d3" x="18.5" y="11.5" width=".8" height=".8"/>
+</g>
+
+<!-- Legs -->
+<g class="body-lean" fill="#DE886D">
+  <rect x="3" y="13" width="1" height="2"/>
+  <rect x="5" y="13" width="1" height="2"/>
+  <rect x="9" y="13" width="1" height="2"/>
+  <rect x="11" y="13" width="1" height="2"/>
+</g>
+
+<!-- Body -->
+<g class="body-lean"><g class="breathe">
+  <rect x="2" y="6" width="11" height="7" fill="#DE886D"/>
+  <g class="eyes"><g class="blink" fill="#000">
+    <rect x="4" y="8" width="1" height="2"/>
+    <rect x="10" y="8" width="1" height="2"/>
+  </g></g>
+</g></g>
+
+<!-- Left arm (holds plank down) -->
+<g class="body-lean"><g class="breathe">
+  <g class="arm-l">
+    <rect x="0" y="9" width="2" height="2" fill="#DE886D"/>
+  </g>
+</g></g>
+
+<!-- Right arm + handsaw -->
+<g class="body-lean"><g class="breathe">
+  <g class="arm-r">
+    <rect x="13" y="9" width="2" height="2" fill="#DE886D"/>
+    <!-- Saw handle (D-grip) -->
+    <rect x="14.2" y="7.5" width="1.8" height="3.5" fill="#5D4037"/>
+    <rect x="15.5" y="7" width="1" height="4" fill="#4E342E"/>
+    <!-- Blade -->
+    <rect x="16" y="9.5" width="8" height="1" fill="#B0BEC5"/>
+    <rect x="16" y="10.5" width="8" height=".3" fill="#78909C"/>
+    <!-- Teeth (alternating nubs) -->
+    <rect x="16" y="10.8" width=".8" height=".6" fill="#90A4AE"/>
+    <rect x="17.2" y="10.8" width=".8" height=".6" fill="#90A4AE"/>
+    <rect x="18.4" y="10.8" width=".8" height=".6" fill="#90A4AE"/>
+    <rect x="19.6" y="10.8" width=".8" height=".6" fill="#90A4AE"/>
+    <rect x="20.8" y="10.8" width=".8" height=".6" fill="#90A4AE"/>
+    <rect x="22" y="10.8" width=".8" height=".6" fill="#90A4AE"/>
+  </g>
+</g></g>
+</svg>

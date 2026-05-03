@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -25 45 45" width="500" height="500" shape-rendering="crispEdges">
+<defs><style>
+  .breathe{transform-origin:7.5px 13px;animation:breathe 3.2s infinite ease-in-out}
+  .bob{transform-origin:7.5px 15px;animation:effort 3s infinite ease-in-out}
+  .shad{transform-origin:7.5px 15.5px;animation:shad 3s infinite ease-in-out}
+  .arm-l{transform-origin:2px 10px;animation:curl-l 3s infinite ease-in-out}
+  .arm-r{transform-origin:14px 10px;animation:curl-r 3s infinite ease-in-out}
+  .eyes{transform-origin:7.5px 9px;animation:squint 3s infinite}
+  @keyframes breathe{0%,100%{transform:scale(1,1) translate(0,0)}50%{transform:scale(1.02,.98) translate(0,.4px)}}
+  @keyframes effort{
+    0%,100%{transform:translateY(0) scale(1,1)}
+    10%,12%{transform:translateY(0) scale(1.1,.9)}
+    20%,45%{transform:translateY(0) scale(1,1)}
+    58%,60%{transform:translateY(0) scale(1.1,.9)}
+    70%,95%{transform:translateY(0) scale(1,1)}
+  }
+  @keyframes shad{
+    0%,100%{transform:scaleX(1);opacity:.5}
+    11%{transform:scaleX(1.1);opacity:.6}
+    59%{transform:scaleX(1.1);opacity:.6}
+  }
+  @keyframes curl-r{
+    0%,100%{transform:rotate(0deg)}
+    15%,40%{transform:rotate(-88deg)}
+  }
+  @keyframes curl-l{
+    0%,50%,100%{transform:rotate(0deg)}
+    65%,90%{transform:rotate(88deg)}
+  }
+  @keyframes squint{
+    0%,8%,100%{transform:scaleY(1)}
+    4%{transform:scaleY(0.1)}
+    20%,38%{transform:scaleY(0.45)}
+    70%,88%{transform:scaleY(0.45)}
+  }
+</style></defs>
+
+<rect class="shad" x="3" y="15" width="9" height="1" fill="#000" opacity=".5"/>
+
+<!-- Legs -->
+<g fill="#DE886D">
+  <rect x="3" y="13" width="1" height="2"/>
+  <rect x="5" y="13" width="1" height="2"/>
+  <rect x="9" y="13" width="1" height="2"/>
+  <rect x="11" y="13" width="1" height="2"/>
+</g>
+
+<!-- Body -->
+<g class="bob"><g class="breathe">
+  <rect x="2" y="6" width="11" height="7" fill="#DE886D"/>
+  <g class="eyes" fill="#000">
+    <rect x="4" y="8" width="1" height="2"/>
+    <rect x="10" y="8" width="1" height="2"/>
+  </g>
+</g></g>
+
+<!-- Left arm + dumbbell -->
+<g class="bob">
+  <g class="arm-l">
+    <rect x="0" y="9" width="2" height="2" fill="#DE886D"/>
+    <!-- Dumbbell extends left -->
+    <rect x="-6" y="9.4" width="6" height="1.2" fill="#9E9E9E"/>
+    <rect x="-7.8" y="8.3" width="2" height="3.4" fill="#424242"/>
+    <rect x="-1" y="8.3" width="2" height="3.4" fill="#424242"/>
+  </g>
+</g>
+
+<!-- Right arm + dumbbell -->
+<g class="bob">
+  <g class="arm-r">
+    <rect x="13" y="9" width="2" height="2" fill="#DE886D"/>
+    <!-- Dumbbell extends right -->
+    <rect x="15" y="9.4" width="6" height="1.2" fill="#9E9E9E"/>
+    <rect x="14" y="8.3" width="2" height="3.4" fill="#424242"/>
+    <rect x="20.8" y="8.3" width="2" height="3.4" fill="#424242"/>
+  </g>
+</g>
+</svg>

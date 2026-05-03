@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -25 45 45" width="500" height="500" shape-rendering="crispEdges">
+<defs><style>
+  .breathe{transform-origin:7.5px 13px;animation:breathe 3.2s infinite ease-in-out}
+  .blink{transform-origin:7.5px 9px;animation:blink 4s infinite}
+  .bob{transform-origin:7.5px 15px;animation:bob 2s infinite ease-in-out}
+  .shad{transform-origin:7.5px 15.5px;animation:shad 2s infinite ease-in-out}
+  .arm-l{transform-origin:2px 10px;animation:arm-l 2s infinite ease-in-out}
+  .arm-r{transform-origin:14px 10px;animation:arm-r 2s infinite ease-in-out}
+  .eyes{animation:eat-eyes 2s infinite ease-in-out}
+  .mouth{opacity:0;transform-origin:7.5px 11px;animation:mouth 2s infinite ease-in-out}
+  .steam{opacity:0}
+  .s1{animation:steam 1.6s 0s infinite ease-out}
+  .s2{animation:steam 1.6s -.53s infinite ease-out}
+  .s3{animation:steam 1.6s -1.06s infinite ease-out}
+  .bowl{animation:bowl-lift 2s infinite ease-in-out}
+  @keyframes breathe{0%,100%{transform:scale(1,1) translate(0,0)}50%{transform:scale(1.02,.98) translate(0,.5px)}}
+  @keyframes blink{0%,8%,100%{transform:scaleY(1)}4%{transform:scaleY(0.1)}}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(.3px)}}
+  @keyframes shad{0%,100%{transform:scaleX(1);opacity:.5}50%{transform:scaleX(1.02);opacity:.52}}
+  @keyframes arm-l{0%,100%{transform:rotate(22deg)}40%,55%{transform:rotate(40deg)}}
+  @keyframes arm-r{0%,100%{transform:rotate(-22deg)}40%,55%{transform:rotate(-40deg)}}
+  @keyframes eat-eyes{0%,100%{transform:translate(0,1.2px)}40%,55%{transform:translate(0,-0.5px)}}
+  @keyframes mouth{0%,35%,63%,100%{opacity:0;transform:scaleY(0.1)}43%,57%{opacity:1;transform:scaleY(1)}}
+  @keyframes steam{0%{opacity:0;transform:translateY(0)}15%{opacity:.65}85%{opacity:.2;transform:translateY(-5px)}100%{opacity:0;transform:translateY(-6px)}}
+  @keyframes bowl-lift{0%,100%{transform:translateY(0)}40%,55%{transform:translateY(-1.5px)}}
+</style></defs>
+
+<rect class="shad" x="3" y="15" width="9" height="1" fill="#000" opacity=".5"/>
+
+<!-- Legs -->
+<g class="bob" fill="#DE886D">
+  <rect x="3" y="13" width="1" height="2"/>
+  <rect x="5" y="13" width="1" height="2"/>
+  <rect x="9" y="13" width="1" height="2"/>
+  <rect x="11" y="13" width="1" height="2"/>
+</g>
+
+<!-- Body -->
+<g class="bob"><g class="breathe">
+  <rect x="2" y="6" width="11" height="7" fill="#DE886D"/>
+  <rect class="mouth" x="5.5" y="10.5" width="4" height="1.5" fill="#000"/>
+  <g class="eyes"><g class="blink" fill="#000">
+    <rect x="4" y="8" width="1" height="2"/>
+    <rect x="10" y="8" width="1" height="2"/>
+  </g></g>
+</g></g>
+
+<!-- Arms (below bowl in z-order) -->
+<g class="bob"><g class="breathe">
+  <g class="arm-l"><rect x="0" y="9" width="2" height="2" fill="#DE886D"/></g>
+</g></g>
+<g class="bob"><g class="breathe">
+  <g class="arm-r"><rect x="13" y="9" width="2" height="2" fill="#DE886D"/></g>
+</g></g>
+
+<!-- Bowl LAST so it renders in front of body + arms -->
+<g class="bob"><g class="bowl">
+  <!-- Steam -->
+  <g fill="#90A4AE">
+    <rect class="steam s1" x="5" y="10" width=".7" height="1.1"/>
+    <rect class="steam s2" x="7.5" y="10" width=".7" height="1.1"/>
+    <rect class="steam s3" x="10" y="10" width=".7" height="1.1"/>
+  </g>
+  <!-- Bowl rim -->
+  <rect x="1.5" y="11.5" width="12" height="1" fill="#607D8B"/>
+  <!-- Bowl body -->
+  <rect x="2" y="12.5" width="11" height="2.5" fill="#546E7A"/>
+  <!-- Food inside -->
+  <rect x="2.5" y="12.5" width="2.5" height="1" fill="#FFCC80"/>
+  <rect x="5.5" y="12.5" width="2" height="1" fill="#EF9A9A"/>
+  <rect x="8" y="12.5" width="2" height="1" fill="#A5D6A7"/>
+  <rect x="10.5" y="12.5" width="2" height="1" fill="#FFF176"/>
+</g></g>
+</svg>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Clawd SVG Gallery</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #111113; color: #e0e0e0; font-family: 'DM Sans', system-ui, sans-serif; padding: 32px; }
+  h1 { font-size: 1.4rem; margin-bottom: 8px; color: #e8a84c; letter-spacing: .05em; }
+  p { color: #888; font-size: .85rem; margin-bottom: 32px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
+  .card {
+    background: #1a1a1e;
+    border: 1px solid #2a2a30;
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    transition: border-color .2s, transform .2s;
+    cursor: pointer;
+  }
+  .card:hover { border-color: #e8a84c; transform: translateY(-2px); }
+  .card img { width: 140px; height: 140px; image-rendering: pixelated; }
+  .card-name { font-size: .8rem; color: #aaa; letter-spacing: .08em; text-transform: uppercase; }
+  .card-tag {
+    font-size: .7rem; background: #2a2a30; border-radius: 4px;
+    padding: 2px 8px; color: #e8a84c;
+  }
+  .section-label {
+    grid-column: 1/-1;
+    font-size: .7rem; text-transform: uppercase; letter-spacing: .1em;
+    color: #555; padding: 8px 0 4px; border-bottom: 1px solid #222;
+  }
+</style>
+</head>
+<body>
+<h1>Clawd SVG Gallery</h1>
+<p>All context-aware Clawd animations. Click any card to copy the filename.</p>
+
+<div class="grid">
+  <div class="section-label">Work &amp; Teaching</div>
+
+  <div class="card" onclick="copy('clawd-working-typing.svg')">
+    <img src="assets/clawd-working-typing.svg" alt="Typing">
+    <span class="card-name">Typing</span>
+    <span class="card-tag">coding / writing</span>
+  </div>
+  <div class="card" onclick="copy('clawd-teaching.svg')">
+    <img src="assets/clawd-teaching.svg" alt="Teaching">
+    <span class="card-name">Teaching</span>
+    <span class="card-tag">class time</span>
+  </div>
+  <div class="card" onclick="copy('clawd-grading.svg')">
+    <img src="assets/clawd-grading.svg" alt="Grading">
+    <span class="card-name">Grading</span>
+    <span class="card-tag">marking / prep</span>
+  </div>
+  <div class="card" onclick="copy('clawd-reading.svg')">
+    <img src="assets/clawd-reading.svg" alt="Reading">
+    <span class="card-name">Reading</span>
+    <span class="card-tag">study / prep</span>
+  </div>
+  <div class="card" onclick="copy('clawd-thinking.svg')">
+    <img src="assets/clawd-thinking.svg" alt="Thinking">
+    <span class="card-name">Thinking</span>
+    <span class="card-tag">planning</span>
+  </div>
+  <div class="card" onclick="copy('clawd-phone.svg')">
+    <img src="assets/clawd-phone.svg" alt="On Phone">
+    <span class="card-name">On Phone</span>
+    <span class="card-tag">calls / admin</span>
+  </div>
+  <div class="card" onclick="copy('clawd-working-building.svg')">
+    <img src="assets/clawd-working-building.svg" alt="Building">
+    <span class="card-name">Building</span>
+    <span class="card-tag">making things</span>
+  </div>
+
+  <div class="section-label">Daily Life</div>
+
+  <div class="card" onclick="copy('clawd-coffee.svg')">
+    <img src="assets/clawd-coffee.svg" alt="Coffee">
+    <span class="card-name">Coffee</span>
+    <span class="card-tag">morning / break</span>
+  </div>
+  <div class="card" onclick="copy('clawd-eating.svg')">
+    <img src="assets/clawd-eating.svg" alt="Eating">
+    <span class="card-name">Eating</span>
+    <span class="card-tag">lunch / break</span>
+  </div>
+  <div class="card" onclick="copy('clawd-lazy.svg')">
+    <img src="assets/clawd-lazy.svg" alt="Lazy">
+    <span class="card-name">Lazy / Nap</span>
+    <span class="card-tag">after school</span>
+  </div>
+  <div class="card" onclick="copy('clawd-celebrating.svg')">
+    <img src="assets/clawd-celebrating.svg" alt="Celebrating">
+    <span class="card-name">Celebrating</span>
+    <span class="card-tag">wins / friday</span>
+  </div>
+  <div class="card" onclick="copy('clawd-idle-living.svg')">
+    <img src="assets/clawd-idle-living.svg" alt="Idle">
+    <span class="card-name">Idle</span>
+    <span class="card-tag">default / waiting</span>
+  </div>
+  <div class="card" onclick="copy('clawd-workout.svg')">
+    <img src="assets/clawd-workout.svg" alt="Workout">
+    <span class="card-name">Workout</span>
+    <span class="card-tag">exercise</span>
+  </div>
+
+  <div class="section-label">Garden &amp; Craft</div>
+
+  <div class="card" onclick="copy('clawd-farming-watering.svg')">
+    <img src="assets/clawd-farming-watering.svg" alt="Watering">
+    <span class="card-name">Watering</span>
+    <span class="card-tag">gardening</span>
+  </div>
+  <div class="card" onclick="copy('clawd-weeding.svg')">
+    <img src="assets/clawd-weeding.svg" alt="Weeding">
+    <span class="card-name">Weeding</span>
+    <span class="card-tag">gardening</span>
+  </div>
+  <div class="card" onclick="copy('clawd-woodworking-saw.svg')">
+    <img src="assets/clawd-woodworking-saw.svg" alt="Sawing">
+    <span class="card-name">Sawing</span>
+    <span class="card-tag">woodworking</span>
+  </div>
+  <div class="card" onclick="copy('clawd-pruning.svg')">
+    <img src="assets/clawd-pruning.svg" alt="Pruning">
+    <span class="card-name">Pruning</span>
+    <span class="card-tag">gardening</span>
+  </div>
+  <div class="card" onclick="copy('clawd-digging.svg')">
+    <img src="assets/clawd-digging.svg" alt="Digging">
+    <span class="card-name">Digging</span>
+    <span class="card-tag">gardening</span>
+  </div>
+  <div class="card" onclick="copy('clawd-planting.svg')">
+    <img src="assets/clawd-planting.svg" alt="Planting">
+    <span class="card-name">Planting</span>
+    <span class="card-tag">gardening</span>
+  </div>
+  <div class="card" onclick="copy('clawd-harvesting.svg')">
+    <img src="assets/clawd-harvesting.svg" alt="Harvesting">
+    <span class="card-name">Harvesting</span>
+    <span class="card-tag">gardening</span>
+  </div>
+  <div class="card" onclick="copy('clawd-raking.svg')">
+    <img src="assets/clawd-raking.svg" alt="Raking">
+    <span class="card-name">Raking</span>
+    <span class="card-tag">gardening</span>
+  </div>
+
+  <div class="section-label">Home &amp; Hobbies</div>
+
+  <div class="card" onclick="copy('clawd-cooking.svg')">
+    <img src="assets/clawd-cooking.svg" alt="Cooking">
+    <span class="card-name">Cooking</span>
+    <span class="card-tag">home / leisure</span>
+  </div>
+  <div class="card" onclick="copy('clawd-painting.svg')">
+    <img src="assets/clawd-painting.svg" alt="Painting">
+    <span class="card-name">Painting</span>
+    <span class="card-tag">art / craft</span>
+  </div>
+  <div class="card" onclick="copy('clawd-fishing.svg')">
+    <img src="assets/clawd-fishing.svg" alt="Fishing">
+    <span class="card-name">Fishing</span>
+    <span class="card-tag">leisure</span>
+  </div>
+  <div class="card" onclick="copy('clawd-campfire.svg')">
+    <img src="assets/clawd-campfire.svg" alt="Campfire">
+    <span class="card-name">Campfire</span>
+    <span class="card-tag">outdoors</span>
+  </div>
+  <div class="card" onclick="copy('clawd-blob.svg')">
+    <img src="assets/clawd-blob.svg" alt="Blob">
+    <span class="card-name">Blob / Doze</span>
+    <span class="card-tag">very relaxed</span>
+  </div>
+</div>
+
+<script>
+function copy(name) {
+  navigator.clipboard.writeText(name).then(() => {
+    const toast = document.createElement('div');
+    toast.textContent = 'Copied: ' + name;
+    toast.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#e8a84c;color:#111;padding:8px 18px;border-radius:8px;font-size:.85rem;font-weight:600;pointer-events:none;';
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 2000);
+  });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -25 45 45" width="500" height="500" shape-rendering="crispEdges">
+<defs><style>
+  .breathe{transform-origin:7.5px 13px;animation:breathe 3.2s infinite ease-in-out}
+  .blink{transform-origin:7.5px 9px;animation:blink 5s infinite}
+  .bob{transform-origin:7.5px 15px;animation:bob 3s infinite ease-in-out}
+  .shad{transform-origin:7.5px 15.5px;animation:shad 3s infinite ease-in-out}
+  .arm-l{transform-origin:2px 10px;animation:arm-l 3s infinite ease-in-out}
+  .arm-r{transform-origin:14px 10px;animation:arm-r 3s infinite ease-in-out}
+  .plant{animation:plant-lower 3s infinite ease-in-out}
+  .sprout{transform-origin:7.5px 11.5px;animation:sprout-sway 3s infinite ease-in-out}
+  @keyframes breathe{0%,100%{transform:scale(1,1) translate(0,0)}50%{transform:scale(1.02,.98) translate(0,.4px)}}
+  @keyframes blink{0%,8%,100%{transform:scaleY(1)}4%{transform:scaleY(0.1)}}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(.3px)}}
+  @keyframes shad{0%,100%{transform:scaleX(1);opacity:.5}50%{transform:scaleX(1.01);opacity:.51}}
+  @keyframes arm-l{0%,100%{transform:rotate(25deg)}45%,60%{transform:rotate(42deg)}}
+  @keyframes arm-r{0%,100%{transform:rotate(-25deg)}45%,60%{transform:rotate(-42deg)}}
+  @keyframes plant-lower{0%,100%{transform:translateY(0)}45%,60%{transform:translateY(1.5px)}}
+  @keyframes sprout-sway{0%,100%{transform:rotate(0)}50%{transform:rotate(4deg)}}
+</style></defs>
+
+<rect class="shad" x="3" y="15" width="9" height="1" fill="#000" opacity=".5"/>
+
+<!-- Planting hole -->
+<rect x="5" y="14.2" width="5" height=".8" fill="#3E2723"/>
+<rect x="5.5" y="14.5" width="4" height=".5" fill="#2E1B12"/>
+
+<!-- Soil mounds beside hole -->
+<rect x="3" y="13.8" width="2.5" height=".6" fill="#795548"/>
+<rect x="9.5" y="13.8" width="2.5" height=".6" fill="#795548"/>
+
+<!-- Legs -->
+<g class="bob" fill="#DE886D">
+  <rect x="3" y="13" width="1" height="2"/>
+  <rect x="5" y="13" width="1" height="2"/>
+  <rect x="9" y="13" width="1" height="2"/>
+  <rect x="11" y="13" width="1" height="2"/>
+</g>
+
+<!-- Body -->
+<g class="bob"><g class="breathe">
+  <rect x="2" y="6" width="11" height="7" fill="#DE886D"/>
+  <g class="blink" fill="#000">
+    <rect x="4" y="8" width="1" height="2"/>
+    <rect x="10" y="8" width="1" height="2"/>
+  </g>
+</g></g>
+
+<!-- Left arm -->
+<g class="bob"><g class="breathe">
+  <g class="arm-l"><rect x="0" y="9" width="2" height="2" fill="#DE886D"/></g>
+</g></g>
+<!-- Right arm -->
+<g class="bob"><g class="breathe">
+  <g class="arm-r"><rect x="13" y="9" width="2" height="2" fill="#DE886D"/></g>
+</g></g>
+
+<!-- Seedling LAST — renders in front of arms -->
+<g class="bob"><g class="plant">
+  <!-- Pot body -->
+  <rect x="5" y="12.2" width="5" height="2.2" fill="#BF8D6D"/>
+  <!-- Pot rim -->
+  <rect x="4.5" y="11.8" width="6" height=".7" fill="#D4A07A"/>
+  <!-- Soil in pot -->
+  <rect x="5.3" y="12.2" width="4.4" height=".8" fill="#5D4037"/>
+  <!-- Stem -->
+  <rect x="7.3" y="10.2" width=".8" height="2" fill="#558B2F"/>
+  <!-- Leaves -->
+  <g class="sprout">
+    <rect x="5.8" y="9.5" width="2" height="1" fill="#81C784"/>
+    <rect x="7.5" y="8.8" width="2" height="1" fill="#66BB6A"/>
+    <rect x="6.5" y="8.3" width="1.5" height=".8" fill="#A5D6A7"/>
+  </g>
+</g></g>
+</svg>

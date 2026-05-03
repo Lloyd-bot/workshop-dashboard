@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -25 45 45" width="500" height="500" shape-rendering="crispEdges">
+<defs><style>
+  .breathe{transform-origin:7.5px 13px;animation:breathe 3.2s infinite ease-in-out}
+  .blink{transform-origin:7.5px 9px;animation:blink 4s infinite}
+  .bob{transform-origin:7.5px 15px;animation:bob 1.4s infinite ease-in-out}
+  .shad{transform-origin:7.5px 15.5px;animation:shad 1.4s infinite ease-in-out}
+  .arm-l{transform-origin:2px 10px;animation:arm-l 1.4s infinite ease-in-out}
+  .arm-r{transform-origin:14px 10px;animation:arm-r 1.4s infinite ease-in-out}
+  .ladle{transform-origin:15px 10px;animation:stir 1.4s infinite ease-in-out}
+  .steam{opacity:0}
+  .s1{animation:steam 1.6s 0s infinite ease-out}
+  .s2{animation:steam 1.6s -.55s infinite ease-out}
+  .s3{animation:steam 1.6s -1.1s infinite ease-out}
+  .flame{transform-origin:7.5px 17px}
+  .fl{animation:flicker 0.6s infinite ease-in-out}
+  .fl2{animation:flicker 0.6s .2s infinite ease-in-out}
+  @keyframes breathe{0%,100%{transform:scale(1,1) translate(0,0)}50%{transform:scale(1.02,.98) translate(0,.4px)}}
+  @keyframes blink{0%,8%,100%{transform:scaleY(1)}4%{transform:scaleY(0.1)}}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(.3px)}}
+  @keyframes shad{0%,100%{transform:scaleX(1);opacity:.5}50%{transform:scaleX(1.01);opacity:.51}}
+  @keyframes arm-l{0%,100%{transform:rotate(30deg)}40%,60%{transform:rotate(38deg)}}
+  @keyframes arm-r{0%,100%{transform:rotate(-30deg)}40%,60%{transform:rotate(-15deg)}}
+  @keyframes stir{0%,100%{transform:rotate(-30deg)}40%,60%{transform:rotate(-15deg)}}
+  @keyframes steam{0%{opacity:0;transform:translateY(0) scaleX(1)}20%{opacity:.55}65%{transform:translateY(-5px) scaleX(1.3)}100%{opacity:0;transform:translateY(-8px) scaleX(.7)}}
+  @keyframes flicker{0%,100%{transform:scaleY(1) scaleX(1)}50%{transform:scaleY(1.15) scaleX(.9)}}
+</style></defs>
+
+<rect class="shad" x="3" y="15" width="9" height="1" fill="#000" opacity=".5"/>
+
+<!-- Legs -->
+<g class="bob" fill="#DE886D">
+  <rect x="3" y="13" width="1" height="2"/>
+  <rect x="5" y="13" width="1" height="2"/>
+  <rect x="9" y="13" width="1" height="2"/>
+  <rect x="11" y="13" width="1" height="2"/>
+</g>
+
+<!-- Body -->
+<g class="bob"><g class="breathe">
+  <rect x="2" y="6" width="11" height="7" fill="#DE886D"/>
+  <g class="blink" fill="#000">
+    <rect x="4" y="8" width="1" height="2"/>
+    <rect x="10" y="8" width="1" height="2"/>
+  </g>
+</g></g>
+
+<!-- Left arm -->
+<g class="bob"><g class="breathe">
+  <g class="arm-l"><rect x="0" y="9" width="2" height="2" fill="#DE886D"/></g>
+</g></g>
+
+<!-- Right arm + ladle -->
+<g class="bob"><g class="breathe">
+  <g class="arm-r">
+    <rect x="13" y="9" width="2" height="2" fill="#DE886D"/>
+    <!-- Ladle handle -->
+    <g class="ladle">
+      <rect x="14.5" y="10.5" width=".7" height="5" fill="#78909C"/>
+      <!-- Ladle cup -->
+      <rect x="13.5" y="15.2" width="2.5" height="1.5" fill="#607D8B"/>
+      <rect x="13.2" y="14.8" width="3" height=".7" fill="#546E7A"/>
+    </g>
+  </g>
+</g></g>
+
+<!-- Pot LAST — renders in front of arms and body -->
+<g class="bob">
+  <!-- Flames under pot -->
+  <g class="flame fl" fill="#FF6F00">
+    <rect x="3.5" y="16.5" width="2" height="2" fill="#FF8F00"/>
+    <rect x="5.5" y="16" width="2" height="2.5" fill="#FF6F00"/>
+    <rect x="7.5" y="16.5" width="2" height="2" fill="#FF8F00"/>
+    <rect x="9.5" y="16" width="1.5" height="2" fill="#FF6F00"/>
+  </g>
+  <g class="flame fl2" fill="#FFCA28">
+    <rect x="4.5" y="17" width="1.2" height="1.5" fill="#FFCA28"/>
+    <rect x="6.5" y="16.8" width="1.2" height="1.8" fill="#FFE082"/>
+    <rect x="8.5" y="17" width="1.2" height="1.5" fill="#FFCA28"/>
+  </g>
+  <!-- Pot base -->
+  <rect x="3" y="15.5" width="9" height=".8" fill="#37474F"/>
+  <!-- Pot body -->
+  <rect x="3.5" y="11.8" width="8" height="4" fill="#455A64"/>
+  <!-- Pot rim -->
+  <rect x="3" y="11.3" width="9" height=".8" fill="#546E7A"/>
+  <!-- Lid -->
+  <rect x="3.5" y="10.8" width="8" height=".8" fill="#607D8B"/>
+  <rect x="6.5" y="10.2" width="2" height=".9" fill="#546E7A"/>
+  <!-- Soup surface (visible between lid gap) -->
+  <rect x="4" y="11.8" width="7" height=".8" fill="#EF6C00" opacity=".7"/>
+  <!-- Steam rising from lid gap -->
+  <g fill="#90A4AE">
+    <rect class="steam s1" x="5" y="10.5" width=".7" height="1.2"/>
+    <rect class="steam s2" x="7.5" y="10.5" width=".7" height="1.2"/>
+    <rect class="steam s3" x="9.8" y="10.5" width=".7" height="1.2"/>
+  </g>
+  <!-- Pot handles -->
+  <rect x="2" y="12.5" width="1.5" height=".8" fill="#37474F"/>
+  <rect x="11.5" y="12.5" width="1.5" height=".8" fill="#37474F"/>
+</g>
+</svg>

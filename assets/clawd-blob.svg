@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -25 45 45" width="500" height="500" shape-rendering="crispEdges">
+<defs><style>
+  .blob{transform-origin:7.5px 11px;animation:blob-breathe 5s infinite ease-in-out}
+  .shad{transform-origin:7.5px 15.5px;animation:shad 5s infinite ease-in-out}
+  .zzz{opacity:0}
+  .z1{animation:zzz 2.8s 0s infinite ease-out}
+  .z2{animation:zzz 2.8s -.93s infinite ease-out}
+  .z3{animation:zzz 2.8s -1.86s infinite ease-out}
+  @keyframes blob-breathe{
+    0%,100%{transform:scaleX(1) scaleY(1)}
+    50%{transform:scaleX(1.04) scaleY(.97)}
+  }
+  @keyframes shad{0%,100%{transform:scaleX(1);opacity:.5}50%{transform:scaleX(1.06);opacity:.55}}
+  @keyframes zzz{
+    0%{opacity:0;transform:translateY(0) scale(.6)}
+    12%{opacity:.9}
+    70%{opacity:.5;transform:translateY(-10px) scale(1)}
+    100%{opacity:0;transform:translateY(-15px) scale(1.1)}
+  }
+</style></defs>
+
+<rect class="shad" x="0" y="15" width="15" height="1" fill="#000" opacity=".5"/>
+
+<!-- ZZZ -->
+<g class="zzz z1" fill="#B0BEC5" transform="translate(9,2)">
+  <rect x="0" y="0" width="3" height=".8"/>
+  <rect x="2.2" y=".8" width=".8" height=".8"/>
+  <rect x="1.2" y="1.6" width=".8" height=".8"/>
+  <rect x="0" y="2.4" width="3" height=".8"/>
+</g>
+<g class="zzz z2" fill="#78909C" transform="translate(11.5,-3)">
+  <rect x="0" y="0" width="4" height="1"/>
+  <rect x="3" y="1" width="1" height="1"/>
+  <rect x="1.5" y="2" width="1" height="1"/>
+  <rect x="0" y="3" width="4" height="1"/>
+</g>
+<g class="zzz z3" fill="#546E7A" transform="translate(13.5,-9)">
+  <rect x="0" y="0" width="5" height="1.2"/>
+  <rect x="3.8" y="1.2" width="1.2" height="1.2"/>
+  <rect x="2.4" y="2.4" width="1.2" height="1.2"/>
+  <rect x="1" y="3.6" width="1.2" height="1.2"/>
+  <rect x="0" y="4.8" width="5" height="1.2"/>
+</g>
+
+<!-- Blob body — wider and rounder than normal character -->
+<g class="blob" fill="#DE886D">
+  <!-- Narrow top (head bump) -->
+  <rect x="2" y="7" width="11" height="2"/>
+  <!-- Core body -->
+  <rect x="1" y="8" width="13" height="6"/>
+  <!-- Wide middle bulge (arms absorbed into blob) -->
+  <rect x="0" y="10" width="15" height="3"/>
+  <!-- Bottom taper -->
+  <rect x="1" y="13" width="13" height="1.5"/>
+  <!-- Tiny stubby feet -->
+  <rect x="3" y="14" width="2" height="1.5"/>
+  <rect x="10" y="14" width="2" height="1.5"/>
+  <!-- Closed eyes (flat sleepy lines) -->
+  <rect x="3" y="10" width="2" height=".9" fill="#4E342E"/>
+  <rect x="10" y="10" width="2" height=".9" fill="#4E342E"/>
+</g>
+</svg>

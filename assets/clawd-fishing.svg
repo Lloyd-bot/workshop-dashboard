@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -25 45 45" width="500" height="500" shape-rendering="crispEdges">
+<defs><style>
+  .breathe{transform-origin:7.5px 13px;animation:breathe 4s infinite ease-in-out}
+  .blink{transform-origin:7.5px 9px;animation:blink 6s infinite}
+  .bob{transform-origin:7.5px 15px;animation:bob 4s infinite ease-in-out}
+  .shad{transform-origin:7.5px 15.5px;animation:shad 4s infinite ease-in-out}
+  .arm-l{transform-origin:2px 10px;animation:arm-l 4s infinite ease-in-out}
+  .arm-r{transform-origin:14px 10px;animation:arm-r 4s infinite ease-in-out}
+  .eyes{animation:eyes-fish 4s infinite ease-in-out}
+  .float-bob{transform-origin:21px 14px;animation:float-bob 1.8s infinite ease-in-out}
+  .water-rip{transform-origin:21px 14px;animation:ripple 1.8s infinite ease-in-out}
+  @keyframes breathe{0%,100%{transform:scale(1,1) translate(0,0)}50%{transform:scale(1.02,.98) translate(0,.4px)}}
+  @keyframes blink{0%,8%,100%{transform:scaleY(1)}4%{transform:scaleY(0.1)}}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(.3px)}}
+  @keyframes shad{0%,100%{transform:scaleX(1);opacity:.5}50%{transform:scaleX(1.01);opacity:.51}}
+  @keyframes arm-l{0%,100%{transform:rotate(5deg)}50%{transform:rotate(10deg)}}
+  @keyframes arm-r{0%,100%{transform:rotate(-42deg)}50%{transform:rotate(-47deg)}}
+  @keyframes eyes-fish{0%,100%{transform:translate(2px,.5px)}50%{transform:translate(2.5px,.8px)}}
+  @keyframes float-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(.6px)}}
+  @keyframes ripple{0%,100%{transform:scaleX(1);opacity:.5}50%{transform:scaleX(1.1);opacity:.3}}
+</style></defs>
+
+<rect class="shad" x="3" y="15" width="9" height="1" fill="#000" opacity=".5"/>
+
+<!-- Fishing line (fixed, goes from ~rod tip to float) -->
+<rect x="19.5" y="3" width=".35" height="11" fill="#546E7A" opacity=".7"/>
+
+<!-- Float bobbing on water surface -->
+<g class="float-bob">
+  <rect x="19.8" y="13.2" width="1" height="1.5" fill="#EF5350"/>
+  <rect x="19.8" y="14.7" width="1" height=".7" fill="#FAFAFA"/>
+  <rect class="water-rip" x="18.5" y="14" width="3.5" height=".5" fill="#42A5F5" opacity=".4"/>
+</g>
+
+<!-- Legs -->
+<g class="bob" fill="#DE886D">
+  <rect x="3" y="13" width="1" height="2"/>
+  <rect x="5" y="13" width="1" height="2"/>
+  <rect x="9" y="13" width="1" height="2"/>
+  <rect x="11" y="13" width="1" height="2"/>
+</g>
+
+<!-- Body -->
+<g class="bob"><g class="breathe">
+  <rect x="2" y="6" width="11" height="7" fill="#DE886D"/>
+  <g class="eyes"><g class="blink" fill="#000">
+    <rect x="4" y="8" width="1" height="2"/>
+    <rect x="10" y="8" width="1" height="2"/>
+  </g></g>
+</g></g>
+
+<!-- Left arm (relaxed) -->
+<g class="bob"><g class="breathe">
+  <g class="arm-l"><rect x="0" y="9" width="2" height="2" fill="#DE886D"/></g>
+</g></g>
+
+<!-- Right arm + fishing rod LAST -->
+<g class="bob"><g class="breathe">
+  <g class="arm-r">
+    <rect x="13" y="9" width="2" height="2" fill="#DE886D"/>
+    <!-- Rod grip -->
+    <rect x="14.2" y="9.8" width=".8" height="1.5" fill="#5D4037"/>
+    <!-- Rod body (extends up when arm at -42deg) -->
+    <rect x="14.3" y="1.5" width=".6" height="8.5" fill="#8D6E63"/>
+    <!-- Reel -->
+    <rect x="13.8" y="9.5" width="1.6" height="1" fill="#607D8B"/>
+  </g>
+</g></g>
+</svg>

@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -25 45 45" width="500" height="500" shape-rendering="crispEdges">
+<defs><style>
+  .breathe{transform-origin:7.5px 13px;animation:breathe 3.2s infinite ease-in-out}
+  .blink{transform-origin:7.5px 9px;animation:blink 5s infinite}
+  .bob{transform-origin:7.5px 15px;animation:bob 3s infinite ease-in-out}
+  .shad{transform-origin:7.5px 15.5px;animation:shad 3s infinite ease-in-out}
+  .arm-l{transform-origin:2px 10px;animation:arm-l 3s infinite ease-in-out}
+  .arm-r{transform-origin:14px 10px;animation:arm-r 3s infinite ease-in-out}
+  .fl{transform-origin:7.5px 14px;animation:flicker .5s infinite ease-in-out}
+  .fl2{transform-origin:7.5px 14px;animation:flicker .5s .17s infinite ease-in-out}
+  .fl3{transform-origin:7.5px 14px;animation:flicker .5s .33s infinite ease-in-out}
+  .ember{opacity:0}
+  .e1{animation:ember-rise 2s 0s infinite}
+  .e2{animation:ember-rise 2s .65s infinite}
+  .e3{animation:ember-rise 2s 1.3s infinite}
+  @keyframes breathe{0%,100%{transform:scale(1,1) translate(0,0)}50%{transform:scale(1.02,.98) translate(0,.4px)}}
+  @keyframes blink{0%,8%,100%{transform:scaleY(1)}4%{transform:scaleY(0.1)}}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(.3px)}}
+  @keyframes shad{0%,100%{transform:scaleX(1);opacity:.5}50%{transform:scaleX(1.01);opacity:.51}}
+  @keyframes arm-l{0%,100%{transform:rotate(30deg)}50%{transform:rotate(25deg)}}
+  @keyframes arm-r{0%,100%{transform:rotate(-30deg)}50%{transform:rotate(-25deg)}}
+  @keyframes flicker{0%,100%{transform:scaleY(1) scaleX(1)}50%{transform:scaleY(1.2) scaleX(.85)}}
+  @keyframes ember-rise{0%{opacity:0;transform:translate(0,0)}15%{opacity:1}80%{opacity:.5}100%{opacity:0;transform:translate(var(--ex,2px),-10px)}}
+</style></defs>
+
+<rect class="shad" x="3" y="15" width="9" height="1" fill="#000" opacity=".5"/>
+
+<!-- Legs -->
+<g class="bob" fill="#DE886D">
+  <rect x="3" y="13" width="1" height="2"/>
+  <rect x="5" y="13" width="1" height="2"/>
+  <rect x="9" y="13" width="1" height="2"/>
+  <rect x="11" y="13" width="1" height="2"/>
+</g>
+
+<!-- Body -->
+<g class="bob"><g class="breathe">
+  <rect x="2" y="6" width="11" height="7" fill="#DE886D"/>
+  <g class="blink" fill="#000">
+    <rect x="4" y="8" width="1" height="2"/>
+    <rect x="10" y="8" width="1" height="2"/>
+  </g>
+</g></g>
+
+<!-- Left arm stretched toward fire -->
+<g class="bob"><g class="breathe">
+  <g class="arm-l"><rect x="0" y="9" width="2" height="2" fill="#DE886D"/></g>
+</g></g>
+<!-- Right arm stretched toward fire -->
+<g class="bob"><g class="breathe">
+  <g class="arm-r"><rect x="13" y="9" width="2" height="2" fill="#DE886D"/></g>
+</g></g>
+
+<!-- Campfire LAST — renders in front of everything -->
+<g class="bob">
+  <!-- Logs cross -->
+  <rect x="4" y="14.5" width="7" height="1" fill="#4E342E" transform="rotate(-15,7.5,15)"/>
+  <rect x="4" y="14.5" width="7" height="1" fill="#3E2723" transform="rotate(15,7.5,15)"/>
+  <!-- Log ends (bark detail) -->
+  <rect x="3.5" y="14.2" width="1.2" height="1.2" fill="#5D4037"/>
+  <rect x="10.3" y="14.2" width="1.2" height="1.2" fill="#5D4037"/>
+  <!-- Embers base glow -->
+  <rect x="5" y="14.2" width="5" height=".8" fill="#FF6F00" opacity=".6"/>
+  <!-- Flame layer 1 (outer, orange) -->
+  <g class="fl">
+    <rect x="4.5" y="11.5" width="2" height="3" fill="#FF6F00"/>
+    <rect x="8.5" y="11.5" width="2" height="3" fill="#FF6F00"/>
+    <rect x="5.5" y="10.5" width="4" height="4" fill="#FF8F00"/>
+  </g>
+  <!-- Flame layer 2 (inner, yellow) -->
+  <g class="fl2">
+    <rect x="5.5" y="11" width="1.5" height="3" fill="#FFCA28"/>
+    <rect x="8" y="11" width="1.5" height="3" fill="#FFCA28"/>
+    <rect x="6.5" y="10" width="2" height="4" fill="#FFE082"/>
+  </g>
+  <!-- Flame layer 3 (core, white-yellow) -->
+  <g class="fl3">
+    <rect x="6.5" y="11.5" width="2" height="2.5" fill="#FFF9C4"/>
+  </g>
+  <!-- Embers rising -->
+  <rect class="ember e1" x="7" y="13" width=".8" height=".8" fill="#FF7043" style="--ex:3px"/>
+  <rect class="ember e2" x="6" y="13" width=".6" height=".6" fill="#FFAB40" style="--ex:-2px"/>
+  <rect class="ember e3" x="8" y="13" width=".6" height=".6" fill="#FF7043" style="--ex:1px"/>
+</g>
+</svg>

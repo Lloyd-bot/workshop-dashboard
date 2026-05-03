@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -25 45 45" width="500" height="500" shape-rendering="crispEdges">
+<defs><style>
+  .breathe{transform-origin:7.5px 13px;animation:breathe 3.2s infinite ease-in-out}
+  .blink{transform-origin:7.5px 9px;animation:blink 4s infinite}
+  .bob{transform-origin:7.5px 15px;animation:bob 3.5s infinite ease-in-out}
+  .shad{transform-origin:7.5px 15.5px;animation:shad 3.5s infinite ease-in-out}
+  .arm-l{transform-origin:2px 10px;animation:arm-l 3.5s infinite ease-in-out}
+  .arm-r{transform-origin:14px 10px;animation:arm-r 3.5s infinite ease-in-out}
+  .eyes{animation:eye-scan 5s infinite ease-in-out}
+  .page-turn{transform-origin:8px 11px;animation:page-turn 5s infinite}
+  @keyframes breathe{0%,100%{transform:scale(1,1) translate(0,0)}50%{transform:scale(1.02,.98) translate(0,.4px)}}
+  @keyframes blink{0%,8%,100%{transform:scaleY(1)}4%{transform:scaleY(0.1)}}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(.3px)}}
+  @keyframes shad{0%,100%{transform:scaleX(1);opacity:.5}50%{transform:scaleX(1.01);opacity:.51}}
+  @keyframes arm-l{0%,100%{transform:rotate(30deg)}50%{transform:rotate(32deg)}}
+  @keyframes arm-r{0%,100%{transform:rotate(-30deg)}50%{transform:rotate(-32deg)}}
+  @keyframes eye-scan{
+    0%,100%{transform:translate(-.5px,2px)}
+    25%,35%{transform:translate(1.5px,2px)}
+    60%,70%{transform:translate(-.5px,2px)}
+    78%,84%{transform:translate(0,2px) scaleY(0.1)}
+    86%{transform:translate(0,2px) scaleY(1)}
+  }
+  @keyframes page-turn{
+    0%,70%{transform:scaleX(1)}
+    75%,80%{transform:scaleX(0)}
+    85%,100%{transform:scaleX(1)}
+  }
+</style></defs>
+
+<rect class="shad" x="3" y="15" width="9" height="1" fill="#000" opacity=".5"/>
+
+<!-- Legs -->
+<g class="bob" fill="#DE886D">
+  <rect x="3" y="13" width="1" height="2"/>
+  <rect x="5" y="13" width="1" height="2"/>
+  <rect x="9" y="13" width="1" height="2"/>
+  <rect x="11" y="13" width="1" height="2"/>
+</g>
+
+<!-- Body (face visible above the small book) -->
+<g class="bob"><g class="breathe">
+  <rect x="2" y="6" width="11" height="7" fill="#DE886D"/>
+  <g class="eyes"><g class="blink" fill="#000">
+    <rect x="4" y="8" width="1" height="2"/>
+    <rect x="10" y="8" width="1" height="2"/>
+  </g></g>
+</g></g>
+
+<!-- Left arm -->
+<g class="bob"><g class="breathe">
+  <g class="arm-l"><rect x="0" y="9" width="2" height="2" fill="#DE886D"/></g>
+</g></g>
+<!-- Right arm -->
+<g class="bob"><g class="breathe">
+  <g class="arm-r"><rect x="13" y="9" width="2" height="2" fill="#DE886D"/></g>
+</g></g>
+
+<!-- Small book LAST — held at chest/arm level, face visible above -->
+<g class="bob">
+  <!-- Cover edges (top) -->
+  <rect x="3" y="9.8" width="4.5" height=".7" fill="#795548"/>
+  <rect x="7.5" y="9.8" width="4.5" height=".7" fill="#6D4C41"/>
+  <!-- Book spine -->
+  <rect x="7" y="10.5" width="1" height="4" fill="#5D4037"/>
+  <!-- Left page -->
+  <rect x="3.5" y="10.5" width="3.5" height="4" fill="#FAFAFA"/>
+  <!-- Left page lines -->
+  <rect x="4" y="11.5" width="2.5" height=".4" fill="#CFD8DC"/>
+  <rect x="4" y="12.3" width="2" height=".4" fill="#CFD8DC"/>
+  <rect x="4" y="13.1" width="2.5" height=".4" fill="#CFD8DC"/>
+  <!-- Right page (with turn animation) -->
+  <g class="page-turn">
+    <rect x="8" y="10.5" width="3.5" height="4" fill="#FAF8F0"/>
+    <!-- Right page lines -->
+    <rect x="8.5" y="11.5" width="2.5" height=".4" fill="#CFD8DC"/>
+    <rect x="8.5" y="12.3" width="1.8" height=".4" fill="#CFD8DC"/>
+    <rect x="8.5" y="13.1" width="2.5" height=".4" fill="#CFD8DC"/>
+  </g>
+</g>
+</svg>

@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -25 45 45" width="500" height="500" shape-rendering="crispEdges">
+<defs><style>
+  .breathe{transform-origin:7.5px 13px;animation:breathe 3.2s infinite ease-in-out}
+  .blink{transform-origin:7.5px 9px;animation:blink 5s infinite}
+  .bob{transform-origin:7.5px 15px;animation:bob 2.4s infinite ease-in-out}
+  .shad{transform-origin:7.5px 15.5px;animation:shad 2.4s infinite ease-in-out}
+  .arm-l{transform-origin:2px 10px;animation:arm-l 2.4s infinite ease-in-out}
+  .arm-r{transform-origin:14px 10px;animation:arm-r 2.4s infinite ease-in-out}
+  .eyes{animation:eyes-grade 2.4s infinite ease-in-out}
+  .mark{opacity:0}
+  .m1{animation:mark-appear 2.4s .4s infinite}
+  .m2{animation:mark-appear 2.4s .9s infinite}
+  .m3{animation:mark-appear 2.4s 1.4s infinite}
+  @keyframes breathe{0%,100%{transform:scale(1,1) translate(0,0)}50%{transform:scale(1.02,.98) translate(0,.5px)}}
+  @keyframes blink{0%,8%,100%{transform:scaleY(1)}4%{transform:scaleY(0.1)}}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(.3px)}}
+  @keyframes shad{0%,100%{transform:scaleX(1);opacity:.5}50%{transform:scaleX(1.01);opacity:.51}}
+  @keyframes arm-l{0%,100%{transform:rotate(15deg)}50%{transform:rotate(18deg)}}
+  @keyframes arm-r{0%,100%{transform:rotate(-5deg)}30%{transform:rotate(-20deg)}60%{transform:rotate(10deg)}100%{transform:rotate(-5deg)}}
+  @keyframes eyes-grade{0%,100%{transform:translate(1.5px,1px)}30%{transform:translate(2px,1.2px)}60%{transform:translate(1px,1.2px)}}
+  @keyframes mark-appear{0%{opacity:0}10%{opacity:1}80%,100%{opacity:1}}
+</style></defs>
+
+<rect class="shad" x="3" y="15" width="9" height="1" fill="#000" opacity=".5"/>
+
+<!-- Stack of papers (right side) -->
+<rect x="15" y="4" width="11" height=".5" fill="#E0E0E0"/>
+<rect x="15" y="5" width="11" height=".5" fill="#EEEEEE"/>
+<rect x="15" y="5.5" width="11" height=".5" fill="#E0E0E0"/>
+<!-- Top paper -->
+<rect x="15" y="6" width="11" height="8" fill="#FAFAFA"/>
+<rect x="15" y="6" width="11" height=".3" fill="#E0E0E0"/>
+<!-- Paper lines -->
+<rect x="16" y="7.5" width="9" height=".5" fill="#E3F2FD" opacity=".8"/>
+<rect x="16" y="9" width="9" height=".5" fill="#E3F2FD" opacity=".8"/>
+<rect x="16" y="10.5" width="9" height=".5" fill="#E3F2FD" opacity=".8"/>
+<rect x="16" y="12" width="9" height=".5" fill="#E3F2FD" opacity=".8"/>
+<!-- Red tick marks appearing on paper -->
+<g fill="#F44336">
+  <g class="mark m1">
+    <rect x="16.5" y="7" width="2.5" height=".8"/>
+    <rect x="16.5" y="7" width=".8" height="1.5"/>
+  </g>
+  <g class="mark m2">
+    <rect x="20" y="8.5" width="1" height="2"/>
+    <rect x="19" y="9.5" width="3" height="1"/>
+  </g>
+  <g class="mark m3">
+    <rect x="16.5" y="11" width="2" height=".8"/>
+    <rect x="17.5" y="10" width=".8" height="2"/>
+  </g>
+</g>
+<!-- Grade at top right of paper -->
+<rect x="23" y="6.5" width="2" height="1.5" fill="#F44336" opacity=".9"/>
+
+<!-- Legs -->
+<g class="bob" fill="#DE886D">
+  <rect x="3" y="13" width="1" height="2"/>
+  <rect x="5" y="13" width="1" height="2"/>
+  <rect x="9" y="13" width="1" height="2"/>
+  <rect x="11" y="13" width="1" height="2"/>
+</g>
+
+<!-- Body -->
+<g class="bob"><g class="breathe">
+  <rect x="2" y="6" width="11" height="7" fill="#DE886D"/>
+  <g class="eyes"><g class="blink" fill="#000">
+    <rect x="4" y="8" width="1" height="2"/>
+    <rect x="10" y="8" width="1" height="2"/>
+  </g></g>
+</g></g>
+
+<!-- Left arm (rests on papers) -->
+<g class="bob"><g class="breathe">
+  <g class="arm-l"><rect x="0" y="9" width="2" height="2" fill="#DE886D"/></g>
+</g></g>
+
+<!-- Right arm + red pen -->
+<g class="bob"><g class="breathe">
+  <g class="arm-r">
+    <rect x="13" y="9" width="2" height="2" fill="#DE886D"/>
+    <!-- Pen body -->
+    <rect x="14.5" y="8" width="1" height="6" fill="#EF5350"/>
+    <!-- Pen cap -->
+    <rect x="14.3" y="7.5" width="1.4" height="1" fill="#B71C1C"/>
+    <!-- Pen tip -->
+    <rect x="14.7" y="14" width=".6" height="1" fill="#37474F"/>
+  </g>
+</g></g>
+</svg>
