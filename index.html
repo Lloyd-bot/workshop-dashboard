@@ -115,15 +115,44 @@ input:focus,select:focus,textarea:focus { border-color:var(--accent); }
 @keyframes clawdArrive    { 0%{transform:translateY(-8px) scale(1.03)} 55%{transform:translateY(3px) scale(0.97)} 100%{transform:translateY(0) scale(1)} }
 @keyframes clawdDragSpin  { 0%{transform:rotate(0deg) scale(1)} 100%{transform:rotate(-12deg) scale(1.08)} }
 @keyframes clawdThrowLand { 0%{transform:scale(1.2)} 50%{transform:scale(0.85)} 75%{transform:scale(1.08)} 100%{transform:scale(1)} }
-#clawd-pet-img { display:block; width:120px; height:120px; image-rendering:pixelated; pointer-events:auto; cursor:grab; user-select:none; transition:filter 0.2s; }
+#clawd-pet-img { display:block; width:120px; height:120px; image-rendering:pixelated; pointer-events:none; cursor:grab; user-select:none; transition:filter 0.2s; }
 #clawd-pet-img:active { cursor:grabbing; }
 .glance-strip.clawd-trap-hover { box-shadow:inset 0 -3px 0 var(--accent); transition:box-shadow 0.15s; }
 .glance-strip.clawd-trap-hover::after { content:'drop to trap ↑'; position:absolute; right:180px; top:50%; transform:translateY(-50%); font-family:var(--font-display); font-size:9px; color:var(--accent); letter-spacing:1px; opacity:0.8; pointer-events:none; }
 #clawd-roamer.trapped #clawd-pet-img { filter:drop-shadow(0 0 8px rgba(232,168,76,0.6)); }
 
+/* ── Clawd Home flip card ── */
+#widget-chat { perspective:1200px; padding:0; }
+.widget-flip-inner { flex:1; min-height:0; position:relative; transform-style:preserve-3d; transition:transform 0.7s cubic-bezier(0.34,1.05,0.64,1); }
+#widget-chat.clawd-home-flipped .widget-flip-inner { transform:rotateY(-180deg); }
+.widget-flip-front,.widget-flip-back { position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden; display:flex; flex-direction:column; }
+.widget-flip-front { padding:var(--gap-lg); }
+.widget-flip-back { transform:rotateY(180deg); overflow:hidden; border-radius:var(--radius-lg); background:#0F1218; }
+.widget-flip-back svg { width:100%; height:100%; display:block; }
+@keyframes ch-rgb { 0%,100%{fill:#FF2050} 16%{fill:#FF7010} 33%{fill:#20D050} 50%{fill:#10C8C0} 66%{fill:#1860FF} 83%{fill:#A020E0} }
+.ch-rgb { animation:ch-rgb 5s linear infinite; }
+.ch-rgb2 { animation:ch-rgb 5s -1.6s linear infinite; }
+.ch-rgb3 { animation:ch-rgb 5s -3.2s linear infinite; }
+.ch-flip-header { display:flex; align-items:center; justify-content:space-between; padding:6px 10px; flex-shrink:0; position:absolute; top:0; left:0; right:0; z-index:2; background:linear-gradient(to bottom,rgba(9,11,18,0.88) 0%,transparent 100%); pointer-events:none; }
+.ch-flip-header button { pointer-events:all; }
+.ch-flip-back-btn { font-family:var(--font-display); font-size:8px; letter-spacing:1px; text-transform:uppercase; color:rgba(200,190,170,0.45); background:none; border:none; cursor:pointer; padding:2px 6px; border-radius:var(--radius-sm); transition:color var(--transition-fast),background var(--transition-fast); }
+.ch-flip-back-btn:hover { color:var(--accent); background:var(--accent-dim); }
+
+/* ── Clawd Home SVG animations (prefixed ch-) ── */
+.ch-rd { animation:ch-rfal 1s linear infinite; }
+.ch-rd:nth-child(odd)  { animation-delay:calc(var(--i,0)*-0.17s) }
+.ch-rd:nth-child(even) { animation-delay:calc(var(--i,0)*-0.23s) }
+@keyframes ch-rfal { 0%{transform:translateY(-2px);opacity:0} 10%{opacity:.65} 90%{opacity:.45} 100%{transform:translateY(58px);opacity:0} }
+.ch-sw1 { animation:ch-sw1k 4.2s ease-in-out infinite }
+.ch-sw2 { animation:ch-sw1k 5.8s ease-in-out infinite }
+.ch-sw3 { animation:ch-sw1k 3.8s 0.6s ease-in-out infinite }
+@keyframes ch-sw1k { 0%,100%{transform:rotate(0deg)} 50%{transform:rotate(3deg)} }
+.ch-vsw { animation:ch-vsw 6s ease-in-out infinite }
+@keyframes ch-vsw { 0%,100%{transform:translateX(0)} 50%{transform:translateX(2px)} }
+
 /* ═══ LAYOUT ═══ */
 @keyframes slideUpFade { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
-.main-content { flex:1; padding:var(--gap-lg) var(--gap-lg) 0; width:100%; display:flex; flex-direction:column; gap:0; position:relative; z-index:1; min-height:0; overflow:hidden; }
+.main-content { flex:1; padding:var(--gap-lg) var(--gap-lg) var(--gap-sm); width:100%; display:flex; flex-direction:column; gap:0; position:relative; z-index:1; min-height:0; overflow:hidden; }
 .main-row { display:flex; align-items:stretch; width:100%; flex:1; min-height:0; }
 .timetable-col { flex:0 0 var(--tt-col-width, 460px); display:flex; flex-direction:column; overflow:hidden; padding-bottom:0; min-width:300px; max-width:70%; min-height:0; }
 .timetable-col .widget-card { flex:1; min-height:0; display:flex; flex-direction:column; overflow:hidden; }
@@ -577,7 +606,8 @@ body.is-dragging-layout .resizable-widget * { pointer-events:none; }
 }
 .chat-panel.open { transform:translateX(0); }
 /* Parking lot drawer */
-.parking-drawer { position:fixed; top:0; left:0; bottom:0; width:340px; max-width:90vw; background:var(--bg-drawer); border-right:1px solid var(--border-subtle); z-index:201; transform:translateX(-100%); transition:transform var(--transition-med); display:flex; flex-direction:column; overflow:hidden; box-shadow:10px 0 40px rgba(0,0,0,0.4); }
+.parking-drawer { position:fixed; top:0; left:0; bottom:0; width:340px; max-width:90vw; background:var(--bg-drawer); border-right:1px solid var(--border-subtle); z-index:201; transform:translateX(-100%); transition:transform var(--transition-med); display:flex; flex-direction:column; overflow:hidden; box-shadow:10px 0 40px rgba(0,0,0,0.4); padding:var(--gap-lg) 0 0; }
+.parking-drawer .drawer-header { padding-left:var(--gap-lg); padding-right:var(--gap-lg); }
 .parking-drawer.open { transform:translateX(0); }
 .chat-header { flex:0 0 auto; display:flex; align-items:center; justify-content:space-between; padding:12px 16px; border-bottom:1px solid var(--border-subtle); }
 .chat-title { font-family:var(--font-display); font-size:0.65rem; font-weight:600; text-transform:uppercase; letter-spacing:2px; color:var(--text-muted); display:flex; align-items:center; gap:8px; }
@@ -661,6 +691,9 @@ kbd { background:var(--bg-surface); border:1px solid var(--border-medium); borde
 .sc-row{display:flex;align-items:center;gap:10px;padding:4px 0;border-bottom:1px solid var(--border-subtle);}
 .sc-key{background:var(--bg-input);border:1px solid var(--border-medium);border-bottom:2px solid var(--border-medium);border-radius:4px;padding:1px 7px;font-family:var(--font-display);font-size:0.6rem;color:var(--text-secondary);white-space:nowrap;min-width:40px;text-align:center;flex-shrink:0;}
 .sc-desc{font-size:0.68rem;color:var(--text-secondary);}
+/* ═══ GLANCE WEATHER ═══ */
+#glanceWeather { font-family:var(--font-display); font-size:11px; color:var(--text-muted); white-space:nowrap; letter-spacing:0.5px; opacity:0.75; }
+
 /* ═══ TIMETABLE KB FOCUS ═══ */
 .tt-cell.kb-focus{outline:2px solid var(--accent);outline-offset:-2px;z-index:2;position:relative;}
 /* ═══ PRINT ═══ */
@@ -678,6 +711,7 @@ kbd { background:var(--bg-surface); border:1px solid var(--border-medium); borde
 
 <div id="app">
   <canvas id="weatherCanvas" class="weather-canvas"></canvas>
+
   <header class="glance-strip">
     <div class="glance-left">
       <div class="glance-brand">Workshop</div>
@@ -686,27 +720,10 @@ kbd { background:var(--bg-surface); border:1px solid var(--border-medium); borde
       <div class="glance-date" id="dateDisplay">---</div>
       <script>(function(){var n=new Date(),p=function(v){return('0'+v).slice(-2)};document.getElementById('clock').textContent=p(n.getHours())+':'+p(n.getMinutes());document.getElementById('dateDisplay').textContent=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][n.getDay()]+' '+n.getDate()+' '+['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][n.getMonth()]+' '+n.getFullYear();})();</script>
     </div>
-    <div class="glance-center">
-      <div class="glance-period-info">
-        <span class="period-label" id="periodLabel">--</span>
-        <span class="period-class" id="periodClass">--</span>
-      </div>
-      <div class="period-countdown-mini">
-        <div class="countdown-arc-mini">
-          <svg viewBox="0 0 36 36"><circle class="arc-track" cx="18" cy="18" r="15"/><circle class="arc-fill" id="arcMini" cx="18" cy="18" r="15" stroke-dasharray="94.25" stroke-dashoffset="0"/></svg>
-        </div>
-        <span class="countdown-time-mini" id="countdownMini">--:--</span>
-      </div>
-    </div>
     <div class="glance-right">
       <div id="topbarRings" style="display:flex;align-items:center;gap:8px"></div>
       <div class="glance-divider" style="height:20px"></div>
-      <div class="week-label">Week</div>
-      <div class="week-toggle">
-        <button id="weekA" onclick="setWeek('A')">A</button>
-        <button id="weekB" onclick="setWeek('B')">B</button>
-      </div>
-      <div class="week-date-range" id="weekDateRange" style="font-family:var(--font-display);font-size:10px;color:var(--text-muted);letter-spacing:0.5px;white-space:nowrap"></div>
+      <button class="btn-icon" onclick="refreshDashboard()" title="Refresh data"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="16" height="16"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></button>
       <button class="btn-icon" onclick="toggleParking()" title="Parking Lot (P)" id="parkingBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M9 8h4.5a2.5 2.5 0 0 1 0 5H9"/><line x1="9" y1="8" x2="9" y2="16"/></svg></button>
       <button class="btn-icon" onclick="toggleClassHub()" title="Class Hub"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></button>
       <button class="btn-icon" id="clawdTrapBtn" onclick="PetController.forceRelease();showToast('Clawd is free!');" title="Release Clawd" style="display:none;font-family:var(--font-display);font-size:13px;font-weight:700;color:var(--accent);letter-spacing:-1px;width:32px">//</button>
@@ -723,8 +740,8 @@ kbd { background:var(--bg-surface); border:1px solid var(--border-medium); borde
             <div class="timetable-controls">
               <button class="timetable-collapse-btn" id="ttCollapseBtn" onclick="toggleTimetableCollapse()" title="Collapse to today">Today</button>
               <div class="timetable-week-tabs" id="ttWeekTabs">
-                <button id="ttWeekA" onclick="viewTTWeek('A')" class="active">Week A</button>
-                <button id="ttWeekB" onclick="viewTTWeek('B')">Week B</button>
+                <button id="ttWeekA" onclick="setWeek('A')" class="active">Week A</button>
+                <button id="ttWeekB" onclick="setWeek('B')">Week B</button>
               </div>
               <button class="btn-icon" onclick="openTtEditorModal()" style="width:24px;height:24px;margin-left:8px;color:var(--text-muted)" title="Edit Timetable"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
               <button class="btn-icon" onclick="openExportPanel()" style="width:24px;height:24px;color:var(--text-muted)" title="Export week plan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></button>
@@ -774,25 +791,286 @@ kbd { background:var(--bg-surface); border:1px solid var(--border-medium); borde
       <div class="widget-row-splitter" id="widgetRowSplitter" title="Drag to resize rows"></div>
 
       <section class="widget-card resizable-widget" id="widget-chat">
-        <div class="widget-header" style="cursor:default;flex-shrink:0">
-          <div style="display:flex;align-items:center;gap:8px"><svg class="drag-handle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="12" r="1"/><circle cx="9" cy="5" r="1"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="5" r="1"/><circle cx="15" cy="19" r="1"/></svg><span class="widget-title widget-title-editable" data-widget-id="widget-chat" data-default="Notes">Notes</span></div>
-          <div style="display:flex;align-items:center;gap:8px">
-            <span id="scratchPadMeta" style="font-family:var(--font-display);font-size:0.5rem;color:var(--text-muted);letter-spacing:0.5px"></span>
-            <button class="btn-icon" onclick="clearScratchPad()" title="Clear notes" style="width:24px;height:24px;color:var(--text-muted)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="14" height="14"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg></button>
+        <div class="widget-flip-inner">
+
+          <!-- FRONT: Notes -->
+          <div class="widget-flip-front">
+            <div class="widget-header" style="cursor:default;flex-shrink:0">
+              <div style="display:flex;align-items:center;gap:8px"><svg class="drag-handle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="12" r="1"/><circle cx="9" cy="5" r="1"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="5" r="1"/><circle cx="15" cy="19" r="1"/></svg><span class="widget-title widget-title-editable" data-widget-id="widget-chat" data-default="Notes">Notes</span></div>
+              <div style="display:flex;align-items:center;gap:8px">
+                <span id="scratchPadMeta" style="font-family:var(--font-display);font-size:0.5rem;color:var(--text-muted);letter-spacing:0.5px"></span>
+                <button class="btn-icon" onclick="clearScratchPad()" title="Clear notes" style="width:24px;height:24px;color:var(--text-muted)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="14" height="14"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg></button>
+              </div>
+            </div>
+            <div style="flex-shrink:0;overflow-x:auto;scrollbar-width:none;padding-bottom:6px;margin-bottom:2px;border-bottom:1px solid var(--border-subtle)">
+              <div style="display:flex;gap:4px;min-width:max-content" id="chipsRow">
+                <span class="chat-chip" onclick="firePromptChip('brief')" title="Today's schedule + tasks → briefing prompt">Day Brief ↗</span>
+                <span class="chat-chip" onclick="firePromptChip('lesson')" title="Next period context → lesson plan prompt">Lesson ↗</span>
+                <span class="chat-chip" onclick="firePromptChip('intentions')" title="Next class → learning intentions + success criteria">Intentions ↗</span>
+                <span class="chat-chip" onclick="firePromptChip('boardnotes')" title="Next class → board copy notes">Board Notes ↗</span>
+                <span class="chat-chip" onclick="firePromptChip('farmemail')" title="Farm events → shop email draft">Farm Email ↗</span>
+                <!-- custom chips injected by renderCustomChips() -->
+              </div>
+            </div>
+            <textarea id="scratchPadArea" class="scratch-pad-area" placeholder="Quick notes, reminders, ideas…  (auto-saved)"
+              oninput="saveScratchPad(this.value)" style="flex:1;min-height:0;resize:none;padding:4px 2px"></textarea>
           </div>
-        </div>
-        <div style="flex-shrink:0;overflow-x:auto;scrollbar-width:none;padding-bottom:6px;margin-bottom:2px;border-bottom:1px solid var(--border-subtle)">
-          <div style="display:flex;gap:4px;min-width:max-content" id="chipsRow">
-            <span class="chat-chip" onclick="firePromptChip('brief')" title="Today's schedule + tasks → briefing prompt">Day Brief ↗</span>
-            <span class="chat-chip" onclick="firePromptChip('lesson')" title="Next period context → lesson plan prompt">Lesson ↗</span>
-            <span class="chat-chip" onclick="firePromptChip('intentions')" title="Next class → learning intentions + success criteria">Intentions ↗</span>
-            <span class="chat-chip" onclick="firePromptChip('boardnotes')" title="Next class → board copy notes">Board Notes ↗</span>
-            <span class="chat-chip" onclick="firePromptChip('farmemail')" title="Farm events → shop email draft">Farm Email ↗</span>
-            <!-- custom chips injected by renderCustomChips() -->
+
+          <!-- BACK: Clawd's Home — night room -->
+          <div class="widget-flip-back">
+            <svg viewBox="0 0 200 125" shape-rendering="crispEdges" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <clipPath id="ch-wclip"><rect x="11" y="8" width="46" height="56"/></clipPath>
+  <radialGradient id="ch-vig" cx="50%" cy="50%" r="70%"><stop offset="30%" stop-color="transparent"/><stop offset="100%" stop-color="#000" stop-opacity=".55"/></radialGradient>
+  <linearGradient id="ch-skygrad" x1="0" y1="0" x2="0" y2="1">
+    <stop id="ch-sky-top" offset="0%"   stop-color="#010408"/>
+    <stop id="ch-sky-bot" offset="100%" stop-color="#040810"/>
+  </linearGradient>
+</defs>
+<rect x="0" y="0" width="200" height="100" fill="#0F1218"/>
+<rect x="0" y="93" width="200" height="7" fill="#090C14"/>
+<rect x="0" y="100" width="200" height="25" fill="#150D08"/>
+<rect x="0" y="104" width="200" height="1" fill="#0D0806" opacity=".7"/>
+<rect x="0" y="111" width="200" height="1" fill="#0D0806" opacity=".7"/>
+<rect x="0" y="118" width="200" height="1" fill="#0D0806" opacity=".7"/>
+<rect x="28"  y="100" width="1" height="7"  fill="#0A0604" opacity=".5"/>
+<rect x="62"  y="100" width="1" height="7"  fill="#0A0604" opacity=".5"/>
+<rect x="98"  y="100" width="1" height="7"  fill="#0A0604" opacity=".5"/>
+<rect x="136" y="100" width="1" height="7"  fill="#0A0604" opacity=".5"/>
+<rect x="170" y="100" width="1" height="7"  fill="#0A0604" opacity=".5"/>
+<rect x="14"  y="107" width="1" height="7"  fill="#0A0604" opacity=".5"/>
+<rect x="50"  y="107" width="1" height="7"  fill="#0A0604" opacity=".5"/>
+<rect x="84"  y="107" width="1" height="7"  fill="#0A0604" opacity=".5"/>
+<rect x="120" y="107" width="1" height="7"  fill="#0A0604" opacity=".5"/>
+<rect x="158" y="107" width="1" height="7"  fill="#0A0604" opacity=".5"/>
+<rect x="36"  y="114" width="1" height="11" fill="#0A0604" opacity=".5"/>
+<rect x="74"  y="114" width="1" height="11" fill="#0A0604" opacity=".5"/>
+<rect x="110" y="114" width="1" height="11" fill="#0A0604" opacity=".5"/>
+<rect x="150" y="114" width="1" height="11" fill="#0A0604" opacity=".5"/>
+<rect x="184" y="114" width="1" height="11" fill="#0A0604" opacity=".5"/>
+<rect x="72" y="97" width="123" height="15" fill="#160818"/>
+<rect x="74" y="99" width="119" height="11" fill="#1E0C20"/>
+<rect x="74" y="99" width="119" height="1"  fill="#281032"/>
+<rect x="74" y="109" width="119" height="1" fill="#281032"/>
+<rect x="74" y="99" width="1"   height="11" fill="#281032"/>
+<rect x="192" y="99" width="1"  height="11" fill="#281032"/>
+<rect x="113" y="101" width="3" height="3" fill="#381545" opacity=".7"/>
+<rect x="143" y="103" width="2" height="3" fill="#381545" opacity=".6"/>
+<rect x="102" y="104" width="2" height="2" fill="#381545" opacity=".5"/>
+<rect x="163" y="101" width="3" height="3" fill="#381545" opacity=".55"/>
+<rect x="128" y="102" width="2" height="4" fill="#381545" opacity=".5"/>
+<rect x="185" y="103" width="2" height="3" fill="#381545" opacity=".45"/>
+<rect x="87"  y="102" width="2" height="3" fill="#381545" opacity=".45"/>
+<rect id="ch-hsky" x="11" y="8" width="46" height="56" fill="url(#ch-skygrad)"/>
+<rect x="15" y="11" width="1" height="1" fill="#EEE8C8"/><rect x="22" y="10" width="1" height="1" fill="#E8E0C0" opacity=".85"/>
+<rect x="30" y="13" width="1" height="1" fill="#EEE8C8" opacity=".75"/><rect x="42" y="9" width="1" height="1" fill="#E0D8B8"/>
+<rect x="51" y="12" width="1" height="1" fill="#EEE8C8"/><rect x="18" y="19" width="1" height="1" fill="#E8E0C0" opacity=".65"/>
+<rect x="38" y="16" width="1" height="1" fill="#EEE8C8" opacity=".8"/><rect x="46" y="23" width="1" height="1" fill="#E0D8B8" opacity=".7"/>
+<rect x="13" y="26" width="1" height="1" fill="#EEE8C8" opacity=".55"/><rect x="26" y="20" width="1" height="1" fill="#E8E0C0"/>
+<rect x="55" y="15" width="1" height="1" fill="#EEE8C8" opacity=".9"/><rect x="33" y="9" width="1" height="1" fill="#E8E0C0" opacity=".6"/>
+<rect x="48" y="10" width="5" height="5" fill="#EEE8B0"/><rect x="49" y="9" width="3" height="1" fill="#EEE8B0"/>
+<rect x="49" y="15" width="3" height="1" fill="#EEE8B0"/><rect x="47" y="11" width="1" height="3" fill="#EEE8B0"/>
+<rect x="53" y="11" width="1" height="3" fill="#EEE8B0"/><rect x="46" y="8" width="9" height="9" fill="#E8E060" opacity=".05"/>
+<rect x="42" y="30" width="2" height="34" fill="#0A1207" opacity=".9"/>
+<rect x="39" y="22" width="8" height="5"  fill="#0C1608" opacity=".9"/>
+<rect x="37" y="18" width="12" height="6" fill="#0E1A0A" opacity=".9"/>
+<rect x="39" y="14" width="8" height="6"  fill="#0C1608" opacity=".85"/>
+<rect x="41" y="11" width="4" height="5"  fill="#0A1207" opacity=".8"/>
+<g id="ch-hrain" clip-path="url(#ch-wclip)">
+  <rect class="ch-rd" style="--i:1" x="14" y="8"  width="1" height="7" fill="#1A3A50"/>
+  <rect class="ch-rd" style="--i:3" x="19" y="8"  width="1" height="7" fill="#1A3A50"/>
+  <rect class="ch-rd" style="--i:5" x="25" y="8"  width="1" height="7" fill="#1A3A50"/>
+  <rect class="ch-rd" style="--i:2" x="31" y="8"  width="1" height="7" fill="#1A3A50"/>
+  <rect class="ch-rd" style="--i:6" x="37" y="8"  width="1" height="7" fill="#1A3A50"/>
+  <rect class="ch-rd" style="--i:4" x="43" y="8"  width="1" height="7" fill="#1A3A50"/>
+  <rect class="ch-rd" style="--i:7" x="49" y="8"  width="1" height="7" fill="#1A3A50"/>
+  <rect class="ch-rd" style="--i:2" x="16" y="8"  width="1" height="5" fill="#1A3A50"/>
+  <rect class="ch-rd" style="--i:5" x="22" y="8"  width="1" height="6" fill="#1A3A50"/>
+  <rect class="ch-rd" style="--i:1" x="28" y="8"  width="1" height="7" fill="#1A3A50"/>
+  <rect class="ch-rd" style="--i:3" x="34" y="8"  width="1" height="5" fill="#1A3A50"/>
+  <rect class="ch-rd" style="--i:6" x="40" y="8"  width="1" height="6" fill="#1A3A50"/>
+  <rect class="ch-rd" style="--i:4" x="46" y="8"  width="1" height="7" fill="#1A3A50"/>
+  <rect class="ch-rd" style="--i:7" x="52" y="8"  width="1" height="5" fill="#1A3A50"/>
+</g>
+<g id="ch-hclouds" opacity="0"><rect x="13" y="13" width="14" height="4" fill="#E0E0E0" opacity=".75"/></g>
+<rect x="8"  y="5"  width="52" height="3"  fill="#1C1208"/>
+<rect x="8"  y="64" width="52" height="3"  fill="#1C1208"/>
+<rect x="8"  y="5"  width="3"  height="62" fill="#1C1208"/>
+<rect x="57" y="5"  width="3"  height="62" fill="#1C1208"/>
+<rect x="8"  y="35" width="52" height="2"  fill="#1C1208"/>
+<rect x="32" y="5"  width="2"  height="62" fill="#1C1208"/>
+<rect x="11" y="8"  width="19" height="1" fill="#FFF" opacity=".05"/>
+<rect x="34" y="8"  width="21" height="1" fill="#FFF" opacity=".05"/>
+<rect x="5"  y="67" width="60" height="4" fill="#180E08"/>
+<rect x="5"  y="71" width="60" height="2" fill="#100806"/>
+<rect x="50" y="62" width="9"  height="5" fill="#3A1A08"/>
+<rect x="51" y="61" width="7"  height="2" fill="#280E04"/>
+<rect x="52" y="59" width="5"  height="3" fill="#080403"/>
+<rect x="53" y="54" width="2"  height="6" fill="#508030"/>
+<rect x="50" y="53" width="4"  height="4" fill="#406828"/>
+<rect x="55" y="52" width="4"  height="4" fill="#508030"/>
+<rect x="52" y="50" width="3"  height="5" fill="#5A8838"/>
+<rect x="0"  y="87" width="21" height="13" fill="#3A1A08"/>
+<rect x="0"  y="91" width="21" height="1"  fill="#280E04"/>
+<rect x="1"  y="86" width="19" height="2"  fill="#280E04"/>
+<rect x="3"  y="83" width="15" height="4"  fill="#080403"/>
+<rect x="10" y="48" width="2" height="36" fill="#2A1808"/>
+<rect x="5"  y="62" width="5"  height="2" fill="#2A1808"/>
+<rect x="11" y="57" width="8"  height="2" fill="#2A1808"/>
+<rect x="3"  y="72" width="7"  height="2" fill="#2A1808"/>
+<rect x="11" y="68" width="9"  height="2" fill="#2A1808"/>
+<g class="ch-sw1" style="transform-origin:10px 62px">
+  <rect x="0" y="50" width="11" height="14" fill="#3E6E28"/>
+  <rect x="0" y="52" width="3"  height="9"  fill="#0F1218"/>
+  <rect x="8" y="55" width="3"  height="8"  fill="#0F1218"/>
+  <rect x="0" y="62" width="4"  height="4"  fill="#0F1218"/>
+  <rect x="5" y="50" width="1"  height="13" fill="#508838" opacity=".3"/>
+</g>
+<g class="ch-sw2" style="transform-origin:12px 58px">
+  <rect x="13" y="47" width="13" height="13" fill="#4A7A30"/>
+  <rect x="23" y="50" width="4"  height="8"  fill="#0F1218"/>
+  <rect x="14" y="57" width="3"  height="4"  fill="#0F1218"/>
+</g>
+<g class="ch-sw3" style="transform-origin:8px 73px">
+  <rect x="0" y="64" width="10" height="12" fill="#3A6828"/>
+  <rect x="0" y="66" width="3"  height="7"  fill="#0F1218"/>
+  <rect x="7" y="69" width="3"  height="6"  fill="#0F1218"/>
+</g>
+<g class="ch-sw1" style="transform-origin:14px 69px">
+  <rect x="12" y="60" width="12" height="12" fill="#4A7A30"/>
+  <rect x="21" y="64" width="4"  height="7"  fill="#0F1218"/>
+  <rect x="13" y="69" width="3"  height="4"  fill="#0F1218"/>
+</g>
+<g class="ch-sw2" style="transform-origin:10px 78px">
+  <rect x="1" y="72" width="18" height="13" fill="#3E6E28"/>
+  <rect x="1" y="72" width="4"  height="8"  fill="#0F1218"/>
+  <rect x="15" y="75" width="4"  height="8"  fill="#0F1218"/>
+  <rect x="7" y="83" width="5"  height="3"  fill="#0F1218"/>
+</g>
+<rect x="148" y="0" width="1" height="15" fill="#140E06"/>
+<rect x="143" y="15" width="11" height="8"  fill="#3A1A08"/>
+<rect x="144" y="14" width="9"  height="2"  fill="#280E04"/>
+<rect x="145" y="12" width="7"  height="3"  fill="#080403"/>
+<g class="ch-vsw">
+  <rect x="147" y="23" width="1" height="22" fill="#2C4518"/>
+  <rect x="150" y="23" width="1" height="17" fill="#2C4518"/>
+  <rect x="144" y="23" width="1" height="12" fill="#2C4518"/>
+  <rect x="139" y="28" width="6" height="5" fill="#3A6028"/>
+  <rect x="150" y="26" width="6" height="5" fill="#305820"/>
+  <rect x="142" y="33" width="5" height="4" fill="#2C5020"/>
+  <rect x="150" y="34" width="5" height="4" fill="#345E28"/>
+  <rect x="138" y="38" width="5" height="4" fill="#3A6028"/>
+  <rect x="148" y="39" width="6" height="4" fill="#305820"/>
+  <rect x="141" y="43" width="4" height="3" fill="#2C5020"/>
+</g>
+<rect x="90"  y="93" width="4" height="7"  fill="#150A04"/>
+<rect x="178" y="93" width="4" height="7"  fill="#150A04"/>
+<rect x="104" y="93" width="3" height="5"  fill="#150A04"/>
+<rect x="165" y="93" width="3" height="5"  fill="#150A04"/>
+<rect x="88"  y="76" width="96" height="19" fill="#162030"/>
+<rect x="89"  y="74" width="94" height="3"  fill="#1C2A3C"/>
+<rect x="90"  y="74" width="92" height="1"  fill="#223040"/>
+<rect x="86"  y="62" width="6"  height="33" fill="#0E1820"/>
+<rect x="87"  y="61" width="5"  height="3"  fill="#162030"/>
+<rect x="180" y="62" width="6"  height="33" fill="#0E1820"/>
+<rect x="180" y="61" width="5"  height="3"  fill="#162030"/>
+<rect x="86"  y="58" width="100" height="5" fill="#0A1018"/>
+<rect x="87"  y="58" width="98"  height="1" fill="#162030"/>
+<rect x="88"  y="62" width="30" height="14" fill="#162030"/>
+<rect x="89"  y="62" width="28" height="1"  fill="#1C2A3C"/>
+<rect x="88"  y="75" width="30" height="1"  fill="#080E14"/>
+<rect x="119" y="62" width="30" height="14" fill="#162030"/>
+<rect x="120" y="62" width="28" height="1"  fill="#1C2A3C"/>
+<rect x="119" y="75" width="30" height="1"  fill="#080E14"/>
+<rect x="150" y="62" width="30" height="14" fill="#162030"/>
+<rect x="151" y="62" width="28" height="1"  fill="#1C2A3C"/>
+<rect x="150" y="75" width="30" height="1"  fill="#080E14"/>
+<rect x="135" y="74" width="2" height="5"   fill="#080E14"/>
+<rect x="91"  y="64" width="17" height="13" fill="#4A3010"/>
+<rect x="92"  y="65" width="15" height="11" fill="#5C4018"/>
+<rect x="93"  y="68" width="13" height="5"  fill="#4A3010"/>
+<rect x="94"  y="70" width="11" height="1"  fill="#6A4820" opacity=".5"/>
+<rect x="162" y="64" width="16" height="13" fill="#281010"/>
+<rect x="163" y="65" width="14" height="11" fill="#341818"/>
+<rect x="164" y="68" width="12" height="5"  fill="#281010"/>
+<rect x="65"  y="80" width="21" height="16" fill="#180E08"/>
+<rect x="65"  y="80" width="21" height="2"  fill="#1E1208"/>
+<rect x="66"  y="82" width="3"  height="14" fill="#100806"/>
+<rect x="80"  y="82" width="3"  height="14" fill="#100806"/>
+<rect x="69"  y="70" width="10" height="10" fill="#3A1A08"/>
+<rect x="70"  y="69" width="8"  height="2"  fill="#280E04"/>
+<rect x="71"  y="67" width="6"  height="3"  fill="#080403"/>
+<rect x="73"  y="60" width="2"  height="8"  fill="#2C4818"/>
+<rect x="69"  y="58" width="5"  height="5"  fill="#285020"/>
+<rect x="74"  y="56" width="5"  height="6"  fill="#304020"/>
+<rect x="71"  y="54" width="4"  height="6"  fill="#3A5025"/>
+<rect x="72"  y="51" width="3"  height="5"  fill="#2E5020"/>
+<rect x="73"  y="49" width="1"  height="4"  fill="#BEBCA0"/>
+<rect x="184" y="83" width="16" height="12" fill="#3A1A08"/>
+<rect x="183" y="87" width="18" height="1"  fill="#280E04"/>
+<rect x="185" y="81" width="14" height="3"  fill="#080403"/>
+<rect x="186" y="44" width="5" height="38" fill="#3A6820"/>
+<rect x="191" y="48" width="5" height="34" fill="#4A7A28"/>
+<rect x="185" y="52" width="4" height="30" fill="#305820"/>
+<rect x="196" y="55" width="4" height="27" fill="#3A6820"/>
+<rect x="188" y="46" width="1" height="34" fill="#5A8830" opacity=".4"/>
+<rect x="193" y="50" width="1" height="30" fill="#5A8830" opacity=".4"/>
+<rect x="186" y="54" width="1" height="26" fill="#508028" opacity=".35"/>
+<rect x="186" y="56" width="5" height="1"  fill="#1A3810" opacity=".5"/>
+<rect x="186" y="64" width="5" height="1"  fill="#1A3810" opacity=".5"/>
+<rect x="186" y="72" width="5" height="1"  fill="#1A3810" opacity=".5"/>
+<rect x="191" y="60" width="5" height="1"  fill="#1A3810" opacity=".5"/>
+<rect x="191" y="68" width="5" height="1"  fill="#1A3810" opacity=".5"/>
+<rect x="191" y="76" width="5" height="1"  fill="#1A3810" opacity=".5"/>
+<!-- WALL ART — colour-palette painting -->
+<rect x="78" y="11" width="36" height="28" fill="#3A2210"/>
+<rect x="79" y="12" width="34" height="26" fill="#241408"/>
+<rect x="80" y="13" width="8" height="8" fill="#C01828"/>
+<rect x="88" y="13" width="8" height="8" fill="#E06800"/>
+<rect x="96" y="13" width="8" height="8" fill="#10A030"/>
+<rect x="104" y="13" width="8" height="8" fill="#1858C0"/>
+<rect x="80" y="21" width="8" height="9" fill="#7810A8"/>
+<rect x="88" y="21" width="8" height="9" fill="#D09000"/>
+<rect x="96" y="21" width="8" height="9" fill="#00A8A0"/>
+<rect x="104" y="21" width="8" height="9" fill="#C03090"/>
+<rect x="80" y="30" width="8" height="9" fill="#101010"/>
+<rect x="88" y="30" width="8" height="9" fill="#585858"/>
+<rect x="96" y="30" width="8" height="9" fill="#D0C8A0"/>
+<rect x="104" y="30" width="8" height="9" fill="#F0F0F0"/>
+<!-- Frame gloss -->
+<rect x="80" y="13" width="32" height="1" fill="#FFF" opacity=".07"/>
+<!-- RGB LED strip — wall behind couch back rail -->
+<rect class="ch-rgb"  x="87"  y="57" width="32" height="1" opacity=".55"/>
+<rect class="ch-rgb2" x="119" y="57" width="32" height="1" opacity=".55"/>
+<rect class="ch-rgb3" x="151" y="57" width="31" height="1" opacity=".55"/>
+<!-- LED glow bloom upward on wall -->
+<rect class="ch-rgb"  x="85"  y="54" width="36" height="3" opacity=".1"/>
+<rect class="ch-rgb2" x="117" y="54" width="36" height="3" opacity=".1"/>
+<rect class="ch-rgb3" x="149" y="54" width="35" height="3" opacity=".1"/>
+<!-- RGB ceiling strip -->
+<rect class="ch-rgb3" x="60" y="1" width="80" height="1" opacity=".3"/>
+<rect class="ch-rgb3" x="58" y="0" width="84" height="2" opacity=".06"/>
+<rect x="157" y="19" width="16" height="12" fill="#0C0E12"/>
+<rect x="158" y="20" width="14" height="8"  fill="#050818"/>
+<rect x="159" y="21" width="3" height="1" fill="#1A60C0" opacity=".9"/>
+<rect x="163" y="21" width="1" height="3" fill="#1A60C0" opacity=".9"/>
+<rect x="159" y="21" width="1" height="3" fill="#1A60C0" opacity=".9"/>
+<rect x="159" y="24" width="3" height="1" fill="#1A60C0" opacity=".7"/>
+<rect x="166" y="21" width="3" height="1" fill="#1A60C0" opacity=".9"/>
+<rect x="168" y="21" width="1" height="3" fill="#1A60C0" opacity=".9"/>
+<rect x="166" y="24" width="3" height="1" fill="#1A60C0" opacity=".9"/>
+<rect x="166" y="24" width="1" height="3" fill="#1A60C0" opacity=".9"/>
+<rect x="168" y="24" width="1" height="3" fill="#1A60C0" opacity=".9"/>
+<rect x="166" y="27" width="3" height="1" fill="#1A60C0" opacity=".7"/>
+<rect x="165" y="23" width="1" height="1" fill="#1A60C0" opacity=".8"/>
+<rect x="165" y="25" width="1" height="1" fill="#1A60C0" opacity=".8"/>
+<rect x="164" y="31" width="2" height="3" fill="#0A0C10"/>
+<rect x="50" y="0" width="110" height="2" fill="#E8A840" opacity=".06"/>
+<rect x="0" y="0" width="200" height="125" fill="url(#ch-vig)"/>
+            </svg>
           </div>
-        </div>
-        <textarea id="scratchPadArea" class="scratch-pad-area" placeholder="Quick notes, reminders, ideas…  (auto-saved)"
-          oninput="saveScratchPad(this.value)" style="flex:1;min-height:0;resize:none;padding:4px 2px"></textarea>
+
+        </div><!-- end widget-flip-inner -->
       </section>
 
         </div><!-- end dashboard-widgets -->
@@ -1295,6 +1573,7 @@ function loadState(){
       state.customChips = Array.isArray(p.customChips) ? p.customChips : [];
       state.widgetRowSplit = (p.widgetRowSplit && typeof p.widgetRowSplit === 'object') ? p.widgetRowSplit : null;
       state.ttColWidth = p.ttColWidth || null;
+      state.clawdHome = (p.clawdHome && typeof p.clawdHome === 'object') ? p.clawdHome : null;
       if(Array.isArray(p.layout) && p.layout.length > 0) state.layout = p.layout;
     }
   }catch(e){ /* use defaults */ }
@@ -1317,12 +1596,12 @@ function getWeekDateRange(offset=0){
 }
 function updateWeekUI(){
   const w=state.currentWeek;
-  document.getElementById('weekA').classList.toggle('active',w==='A');
-  document.getElementById('weekB').classList.toggle('active',w==='B');
-  document.getElementById('settWeekA').classList.toggle('active',w==='A');
-  document.getElementById('settWeekB').classList.toggle('active',w==='B');
-  document.getElementById('ttWeekA').classList.toggle('active',state.viewWeek==='A');
-  document.getElementById('ttWeekB').classList.toggle('active',state.viewWeek==='B');
+  document.getElementById('weekA')?.classList.toggle('active',w==='A');
+  document.getElementById('weekB')?.classList.toggle('active',w==='B');
+  document.getElementById('settWeekA')?.classList.toggle('active',w==='A');
+  document.getElementById('settWeekB')?.classList.toggle('active',w==='B');
+  document.getElementById('ttWeekA')?.classList.toggle('active',state.viewWeek==='A');
+  document.getElementById('ttWeekB')?.classList.toggle('active',state.viewWeek==='B');
   const off=getViewWeekOffset();
   const el=document.getElementById('weekDateRange');
   if(el)el.textContent=getWeekDateRange(off);
@@ -1413,7 +1692,8 @@ function renderTimetable(){
     const temp=w?`<span style="font-size:0.5rem;opacity:0.5;letter-spacing:0">${w.lo}–${w.hi}°</span>`:'';
     const evDot=hasEvent?'<span style="color:var(--accent);font-size:8px;line-height:0;vertical-align:middle"> ●</span>':'';
     const rainBg=w&&w.rainPct>=60?'background:rgba(91,155,213,0.06);':w&&w.rainPct>=30?'background:rgba(91,155,213,0.03);':'';
-    html+=`<div class="tt-header ${wkOff===0&&i===todayIdx?'today':''}" style="${rainBg}">${d}${evDot}<div style="display:flex;gap:4px;align-items:center;justify-content:center;margin-top:1px">${temp}${rain}</div></div>`;
+    const dayDateStr=getWeekDayDate(i,wkOff);const dayNum=parseInt(dayDateStr.split('-')[2],10);
+    html+=`<div class="tt-header ${wkOff===0&&i===todayIdx?'today':''}" style="${rainBg}">${d}<span style="font-size:0.55rem;opacity:0.45;margin-left:3px;font-family:var(--font-display)">${dayNum}</span>${evDot}<div style="display:flex;gap:4px;align-items:center;justify-content:center;margin-top:1px">${temp}${rain}</div></div>`;
   });
   // No separate weather row - weather info embedded in day headers below
   [['P1','P2'],['BREAK:Recess'],['P3','P4'],['BREAK:Lunch'],['P5','P6']].forEach(group=>group.forEach(p=>{
@@ -1463,12 +1743,12 @@ function getNextPeriod(cp){const order=['P1','P2','Recess','P3','P4','Lunch','P5
 function updateCountdown(){
   const now=new Date();const m=now.getHours()*60+now.getMinutes()+now.getSeconds()/60;const w=state.currentWeek;const dIdx=now.getDay()-1;const dName=DAYS[dIdx];const cp=getCurrentPeriod();
   const aMini=document.getElementById('arcMini'),aLarge=document.getElementById('arcLarge'),cMini=document.getElementById('countdownMini'),cLarge=document.getElementById('countdownLarge'),cLabel=document.getElementById('countdownLargeLabel'),cNext=document.getElementById('countdownNext'),pLabel=document.getElementById('periodLabel'),pClass=document.getElementById('periodClass');
-  if(dIdx<0||dIdx>4){pLabel.textContent='WEEKEND';pClass.textContent='';cMini.textContent='--:--';cLarge.textContent='--:--';cLabel.textContent='enjoy';cNext.textContent='Back on Monday';setArc(aMini,94.25,1);setArc(aLarge,490.09,1);return;}
-  if(!cp){const p1=timeToMinutes(state.bells.P1.start);if(m<p1){const r=p1-m;pLabel.textContent='BEFORE SCHOOL';const cell=getTTCell(w,dName,'P1');pClass.textContent=cell?`${getSubjectFull(cell.subject)} — ${cell.className}`:'';cMini.textContent=`${Math.floor(r)}:${String(Math.floor((r%1)*60)).padStart(2,'0')}`;cLarge.textContent=cMini.textContent;cLabel.textContent='until P1';cNext.innerHTML=`First up: <strong>${cell?cell.className:'P1'}</strong>`;const p=1-(r/60);setArc(aMini,94.25,Math.max(0,p));setArc(aLarge,490.09,Math.max(0,p));}else{pLabel.textContent='DAY COMPLETE';pClass.textContent='';cMini.textContent='✓';cLarge.textContent='✓';cLabel.textContent='done';cNext.textContent='See you tomorrow';setArc(aMini,94.25,1);setArc(aLarge,490.09,1);}return;}
+  if(dIdx<0||dIdx>4){if(pLabel)pLabel.textContent='WEEKEND';if(pClass)pClass.textContent='';if(cMini)cMini.textContent='--:--';if(cLarge)cLarge.textContent='--:--';if(cLabel)cLabel.textContent='enjoy';if(cNext)cNext.textContent='Back on Monday';if(aMini)setArc(aMini,94.25,1);if(aLarge)setArc(aLarge,490.09,1);return;}
+  if(!cp){const p1=timeToMinutes(state.bells.P1.start);if(m<p1){const r=p1-m;if(pLabel)pLabel.textContent='BEFORE SCHOOL';const cell=getTTCell(w,dName,'P1');if(pClass)pClass.textContent=cell?`${getSubjectFull(cell.subject)} — ${cell.className}`:'';const ts=`${Math.floor(r)}:${String(Math.floor((r%1)*60)).padStart(2,'0')}`;if(cMini)cMini.textContent=ts;if(cLarge)cLarge.textContent=ts;if(cLabel)cLabel.textContent='until P1';if(cNext)cNext.innerHTML=`First up: <strong>${cell?cell.className:'P1'}</strong>`;const p=1-(r/60);if(aMini)setArc(aMini,94.25,Math.max(0,p));if(aLarge)setArc(aLarge,490.09,Math.max(0,p));}else{if(pLabel)pLabel.textContent='DAY COMPLETE';if(pClass)pClass.textContent='';if(cMini)cMini.textContent='✓';if(cLarge)cLarge.textContent='✓';if(cLabel)cLabel.textContent='done';if(cNext)cNext.textContent='See you tomorrow';if(aMini)setArc(aMini,94.25,1);if(aLarge)setArc(aLarge,490.09,1);}return;}
   const bell=state.bells[cp];const start=timeToMinutes(bell.start);const end=timeToMinutes(bell.end);const rem=end-m;const prog=(m-start)/(end-start);const ts=`${Math.floor(rem)}:${String(Math.floor((rem%1)*60)).padStart(2,'0')}`;
-  cMini.textContent=ts;cLarge.textContent=ts;cLabel.textContent='remaining';setArc(aMini,94.25,prog);setArc(aLarge,490.09,prog);
-  if(cp==='Recess'||cp==='Lunch'){pLabel.textContent=cp.toUpperCase();pClass.textContent='';const np=getNextPeriod(cp);if(np&&!np.startsWith('R')&&!np.startsWith('L')){const nc=getTTCell(w,dName,np);cNext.innerHTML=`Next: <strong>${nc?nc.className:np}</strong>`;}}
-  else{pLabel.textContent=cp;const cell=getTTCell(w,dName,cp);if(cell&&cell.type!=='ghost')pClass.textContent=`${getSubjectFull(cell.subject)} — ${cell.className}`;else if(cell&&cell.type==='ghost')pClass.textContent=`${cell.className} (other teacher)`;else pClass.textContent='Free period';const np=getNextPeriod(cp);if(np){if(np==='Recess'||np==='Lunch')cNext.innerHTML=`Next: <strong>${np}</strong>`;else{const nc=getTTCell(w,dName,np);cNext.innerHTML=`Next: <strong>${nc?nc.className:np}</strong>`;}}else cNext.innerHTML='Last period of the day';}
+  if(cMini)cMini.textContent=ts;if(cLarge)cLarge.textContent=ts;if(cLabel)cLabel.textContent='remaining';if(aMini)setArc(aMini,94.25,prog);if(aLarge)setArc(aLarge,490.09,prog);
+  if(cp==='Recess'||cp==='Lunch'){if(pLabel)pLabel.textContent=cp.toUpperCase();if(pClass)pClass.textContent='';const np=getNextPeriod(cp);if(np&&!np.startsWith('R')&&!np.startsWith('L')){const nc=getTTCell(w,dName,np);if(cNext)cNext.innerHTML=`Next: <strong>${nc?nc.className:np}</strong>`;}}
+  else{if(pLabel)pLabel.textContent=cp;const cell=getTTCell(w,dName,cp);if(cell&&cell.type!=='ghost'){if(pClass)pClass.textContent=`${getSubjectFull(cell.subject)} — ${cell.className}`;}else if(cell&&cell.type==='ghost'){if(pClass)pClass.textContent=`${cell.className} (other teacher)`;}else{if(pClass)pClass.textContent='Free period';}const np=getNextPeriod(cp);if(np){if(np==='Recess'||np==='Lunch'){if(cNext)cNext.innerHTML=`Next: <strong>${np}</strong>`;}else{const nc=getTTCell(w,dName,np);if(cNext)cNext.innerHTML=`Next: <strong>${nc?nc.className:np}</strong>`;}}else{if(cNext)cNext.innerHTML='Last period of the day';}}
 }
 function setArc(el,c,p){el.style.strokeDashoffset=c*(1-Math.min(1,Math.max(0,p)));}
 
@@ -1686,6 +1966,7 @@ const PetController = {
     this.el=document.getElementById('clawd-pet-img');
     this.cnt=document.getElementById('clawd-roamer');
     this.x=window.innerWidth/2-60; this.y=-140; this._pos();
+    if(state.clawdHome){this.x=this._clampX(state.clawdHome.x);this.y=this._clampY(state.clawdHome.y);this._pos();}
     document.addEventListener('mousemove',e=>{
       this.mouseX=e.clientX;this.mouseY=e.clientY;
       if(!this.trapped)this.resetIdle();
@@ -1855,8 +2136,21 @@ const PetController = {
     return{tx:this._clampX(tx),ty:this._clampY(ty),widget,R,isFriday,hasUrgent,afterSchool,isWeekend};
   },
 
+  goHome(cb){
+    if(!state.clawdHome)return false;
+    const{x,y}=state.clawdHome;
+    this._walkTo(this._clampX(x),this._clampY(y),80,cb||function(){});
+    return true;
+  },
   moveToPeekSpot(){
-    if(this.trapped||this.settled)return;
+    if(this.locked||this.trapped||this.settled)return;
+    if(state.clawdHome&&Math.random()<0.28){
+      const{x,y}=state.clawdHome;const now=new Date(),dow=now.getDay();
+      const isFriday=dow===5,isWeekend=dow===0||dow===6,afterSchool=now.getHours()*60+now.getMinutes()>=950;
+      const hasUrgent=(state.tasks||[]).some(t=>t.urgent);
+      this._walkTo(this._clampX(x),this._clampY(y),80,()=>this._pickIdle(isFriday,hasUrgent,false,afterSchool,isWeekend));
+      return;
+    }
     const d=this._pickDest();if(!d)return;
     const{tx,ty,R,isFriday,hasUrgent,afterSchool,isWeekend}=d;
     const speed=hasUrgent?200:afterSchool?75:isWeekend?60:90;
@@ -1919,20 +2213,20 @@ const PetController = {
   },
 
   _pickIdle(isFriday,hasUrgent,hasEvents,afterSchool,isWeekend){
-    if(this.isMoving||this.trapped||this.patrolling||this.settled)return;
+    if(this.locked||this.isMoving||this.trapped||this.patrolling||this.settled)return;
     const cp=getCurrentPeriod(),r=Math.random;
     let c;
     if(hasUrgent){
       const urgAnims=[['thinking','alert','look'],['ultrathink','alert','thinking'],['alert','ultrathink','juggling']][Math.min(2,this.urgencyLevel)];
       c=urgAnims[~~(r()*urgAnims.length)];
     }
-    else if(isWeekend)c=['idle','doze','reading','yawn'][~~(r()*4)];
-    else if(afterSchool)c=['idle','reading','yawn','look'][~~(r()*4)];
-    else if(cp==='Recess'||cp==='Lunch')c=isFriday?(r()<.5?'conducting':'happy'):['building','happy','idle'][~~(r()*3)];
-    else if(this.mood>=4)c=['happy','conducting','reading','wizard','building'][~~(r()*5)];
-    else if(this.mood<=-3)c=['thinking','debugger','ultrathink','look','idle'][~~(r()*5)];
-    else if(isFriday)c=['happy','conducting','reading','wizard','look'][~~(r()*5)];
-    else c=['reading','wizard','idle','sweeping','look','thinking','debugger'][~~(r()*7)];
+    else if(isWeekend)c=['idle','doze','reading','yawn','blob','campfire','fishing','cooking','painting','coffee','lazy'][~~(r()*11)];
+    else if(afterSchool)c=['idle','reading','yawn','look','blob','lazy','coffee','fishing','cooking','painting'][~~(r()*10)];
+    else if(cp==='Recess'||cp==='Lunch')c=isFriday?(r()<.5?'conducting':'happy'):['building','happy','idle','coffee','eating','reading'][~~(r()*6)];
+    else if(this.mood>=4)c=['happy','conducting','reading','wizard','building','painting','coffee'][~~(r()*7)];
+    else if(this.mood<=-3)c=['thinking','debugger','ultrathink','look','idle','blob'][~~(r()*6)];
+    else if(isFriday)c=['happy','conducting','reading','wizard','look','campfire','celebrating'][~~(r()*7)];
+    else c=['reading','wizard','idle','sweeping','look','thinking','debugger','grading','phone','cooking','painting','coffee'][~~(r()*12)];
     const ctx=this.getContextSvg();if(ctx&&!hasUrgent&&r()<0.35)c=ctx;
     this._show(c);
     this.stateTTL=30+~~(r()*60);
@@ -2045,6 +2339,7 @@ const PetController = {
     this.cnt.classList.add('throw-land');
     setTimeout(() => this.cnt.classList.remove('throw-land'), 520);
     this._show('happy'); this.stateTTL = 4;
+    if (el.id === 'widget-chat') setTimeout(() => { if (this.trappedWidget === el) { el.classList.add('clawd-home-flipped'); syncClawdHomeWeather(); } }, 350);
     updateClawdTrapBtn();
     setTimeout(() => {
       if (this.trappedWidget === el && !this.isDragging)
@@ -2058,6 +2353,7 @@ const PetController = {
       this._widgetResizeObs.disconnect();
       this._widgetResizeObs = null;
     }
+    if (this.trappedWidget.id === 'widget-chat') this.trappedWidget.classList.remove('clawd-home-flipped');
     this.trappedWidget.classList.remove('clawd-widget-host', 'clawd-widget-hover');
     this.trappedWidget = null;
     updateClawdTrapBtn();
@@ -2441,6 +2737,7 @@ const PetController = {
     if(this.trapped){this.trapped=false;this.cnt.classList.remove('trapped');}
     if(this.trappedWidget){
       if(this._widgetResizeObs){this._widgetResizeObs.disconnect();this._widgetResizeObs=null;}
+      if(this.trappedWidget.id==='widget-chat')this.trappedWidget.classList.remove('clawd-home-flipped');
       this.trappedWidget.classList.remove('clawd-widget-host','clawd-widget-hover');
       this.trappedWidget=null;
     }
@@ -2458,6 +2755,11 @@ const PetController = {
   },
   handleClick(e){
     if(this.isDragging)return;
+    if(e.shiftKey){
+      this._show('happy');this.stateTTL=3;
+      showToast('Hold shift + drag me to a widget!');
+      return;
+    }
     if(this.locked){
       // Locked in place — single click shows a reaction, hint about the release button
       this.clickCount++;clearTimeout(this.clickTimeout);
@@ -2620,17 +2922,8 @@ function renderBriefing(){
   }
   const tEvs=getEventsForDate(tStr);
   if(tEvs.length>0){html+=`<div class="briefing-section"><div class="briefing-section-label">Today's Events</div>`;tEvs.forEach(e=>html+=`<div class="briefing-urgent-item" style="background:var(--accent-dim);border-left:3px solid var(--accent)"><span style="color:var(--accent);font-weight:500">${escHtml(e.name)}</span><span style="font-size:10px;color:var(--text-muted);margin-left:auto">${e.scope==='all-day'?'All Day':(e.periods||[]).join(', ')}</span></div>`);html+=`</div>`;}
-  const uEvs=(state.events||[]).filter(e=>e.date>tStr&&e.date<=getDatePlusDays(now,7)).sort((a,b)=>a.date.localeCompare(b.date));
-  if(uEvs.length>0){html+=`<div class="briefing-section"><div class="briefing-section-label">Upcoming (7 days)</div>`;uEvs.forEach(e=>html+=`<div class="briefing-class-item"><span class="briefing-class-period" style="min-width:36px">${['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][new Date(e.date+'T00:00:00').getDay()]}</span><span class="briefing-class-dot" style="background:var(--accent)"></span><span class="briefing-class-name">${escHtml(e.name)}</span></div>`);html+=`</div>`;}
-  // Next up banner — show before school and between periods
-  {
-    const allBells=[...PERIODS.map(p=>({p,bell:state.bells[p],type:'period'})),...['Recess','Lunch'].map(b=>({p:b,bell:state.bells[b],type:'break'}))];
-    const nowMin=new Date().getHours()*60+new Date().getMinutes();
-    const next=allBells.find(({bell})=>bell&&timeToMinutes(bell.start)>nowMin);
-    if(next){const cell=next.type==='period'?getTTCell(w,DAYS[dIdx],next.p):null;const name=cell?cell.className||getSubjectFull(cell.subject):next.p;const minsUntil=timeToMinutes(next.bell.start)-nowMin;html+=`<div class="briefing-next-up"><span class="briefing-next-label">Next</span><span class="briefing-next-name">${name}</span><span class="briefing-next-time">${minsUntil<60?minsUntil+'m':next.bell.start}</span></div>`;}
-  }
   html+=`<div class="briefing-section"><div class="briefing-section-label">Today's Classes</div><div class="briefing-classes-list">`;let hc=false;
-  PERIODS.forEach(p=>{const eo=getEventForPeriod(tStr,p);if(eo){hc=true;html+=`<div class="briefing-class-item ${p===cp?'is-current':''}"><span class="briefing-class-period">${p}</span><span class="briefing-class-dot" style="background:var(--accent)"></span><span class="briefing-class-name" style="color:var(--accent)">${escHtml(eo.name)}</span></div>`;}else{const cell=getTTCell(w,DAYS[dIdx],p);if(cell&&cell.subject&&cell.type!=='ghost'){hc=true;html+=`<div class="briefing-class-item ${p===cp?'is-current':''}"><span class="briefing-class-period">${p}</span><span class="briefing-class-dot" style="background:${getSubjectCSSColor(cell.subject)}"></span><span class="briefing-class-name">${cell.className||getSubjectFull(cell.subject)}</span></div>`;}}});
+  PERIODS.forEach(p=>{const eo=getEventForPeriod(tStr,p);if(eo){hc=true;html+=`<div class="briefing-class-item ${p===cp?'is-current':''}"><span class="briefing-class-period">${p}</span><span class="briefing-class-dot" style="background:var(--accent)"></span><span class="briefing-class-name" style="color:var(--accent)">${escHtml(eo.name)}</span></div>`;}else{const cell=getTTCell(w,DAYS[dIdx],p);if(cell&&cell.subject&&cell.type!=='ghost'){hc=true;const lpKey=`${w}-${DAYS[dIdx]}-${p}`;const lp=(state.lessonPlans||{})[lpKey];const notes=lp&&lp.notes?lp.notes.trim():'';html+=`<div class="briefing-class-item ${p===cp?'is-current':''}"><span class="briefing-class-period">${p}</span><span class="briefing-class-dot" style="background:${getSubjectCSSColor(cell.subject)}"></span><div style="display:flex;flex-direction:column;gap:2px"><span class="briefing-class-name">${cell.className||getSubjectFull(cell.subject)}</span>${notes?`<span style="font-size:10px;color:var(--text-muted);font-style:italic;line-height:1.3">${escHtml(notes)}</span>`:''}</div></div>`;}}});
   if(!hc)html+=`<div class="briefing-empty">No classes today</div>`;html+=`</div></div>`;
   const duties=[];['Recess','Lunch'].forEach(bName=>{const d=state.duties[`${w}-${DAYS[dIdx]}-${bName}`];if(d&&d.desc)duties.push({bName,...d});});
   if(duties.length>0){html+=`<div class="briefing-section"><div class="briefing-section-label">Duties & Meetings</div>`;duties.forEach(d=>html+=`<div class="briefing-class-item"><span class="briefing-class-period">${d.bName}</span><span style="color:${d.type==='meeting'?'var(--color-digi)':'var(--color-urgent)'};font-size:10px">${d.type==='meeting'?'◆':'◉'}</span><span class="briefing-class-name">${escHtml(d.desc)}</span></div>`);html+=`</div>`;}
@@ -2920,6 +3213,7 @@ async function fetchWeather(){
     state.weatherData=d;saveState();
     renderTimetable();
     WeatherFX.update(d.current?.weathercode??0);
+    updateGlanceWeather();
   }catch(e){WeatherFX.update(0);}
 }
 function getWeatherIcon(code){
@@ -2935,6 +3229,65 @@ function getWeatherDesc(code){
   if([66,67].includes(code))return'Freezing rain';if([71,73,75,77].includes(code))return'Snow';
   if([80,81,82].includes(code))return'Showers';if([85,86].includes(code))return'Snow showers';
   if([95,96,99].includes(code))return'Thunderstorm';return'Fair';
+}
+
+const WEATHER_GLYPHS={0:'☀️',1:'🌤',2:'⛅',3:'☁️',45:'🌫',48:'🌫',51:'🌦',53:'🌦',55:'🌧',61:'🌧',63:'🌧',65:'🌧',66:'🌧',67:'🌧',71:'❄️',73:'❄️',75:'❄️',77:'❄️',80:'🌦',81:'🌧',82:'🌧',85:'❄️',86:'❄️',95:'⛈',96:'⛈',99:'⛈'};
+const RAIN_CODES=new Set([51,53,55,61,63,65,66,67,80,81,82,85,86,95,96,99]);
+
+
+
+function syncClawdHomeWeather(){
+  const skyTop=document.getElementById('ch-sky-top');
+  const skyBot=document.getElementById('ch-sky-bot');
+  if(!skyTop||!skyBot||!state.weatherData)return;
+  const rain=document.getElementById('ch-hrain');
+  const clouds=document.getElementById('ch-hclouds');
+  const code=state.weatherData.current?.weathercode??0;
+  const h=new Date().getHours();
+  const day=h>=8&&h<18, sunset=h>=18&&h<19, dusk=h>=19&&h<20, eve=h>=20&&h<22;
+  const dawn=h>=6&&h<7, predawn=h>=5&&h<6;
+  // top=zenith, bot=horizon — gradient runs top→bottom
+  let top='#010408', bot='#040810';
+  if(predawn)     { top='#0C0818'; bot='#281020'; }
+  else if(dawn)   { top='#1A2840'; bot='#E05020'; }
+  else if(day)    { top='#2870B8'; bot='#7EC8E3'; }
+  else if(sunset) { top='#1A3888'; bot='#F05818'; }
+  else if(dusk)   { top='#10082A'; bot='#501020'; }
+  else if(eve)    { top='#050610'; bot='#0E0818'; }
+  let showRain=false,cloudOp=0;
+  if(code>=95){
+    top=day?'#1A2028':sunset||dusk?'#140C18':'#080C14';
+    bot=day?'#3A4A58':sunset||dusk?'#201018':'#101820';
+    showRain=true;cloudOp=0.9;
+  }else if(code>=61){
+    top=day?'#283240':sunset||dusk?'#180C18':'#060810';
+    bot=day?'#4A5A68':sunset||dusk?'#280C18':'#0C1420';
+    showRain=true;cloudOp=0.75;
+  }else if(code>=51){
+    top=day?'#304050':sunset||dusk?'#1C1020':'#060A10';
+    bot=day?'#506070':sunset||dusk?'#300C18':'#0A1218';
+    showRain=true;cloudOp=0.55;
+  }else if(code>=2){cloudOp=day?0.5:predawn||dawn?0.25:0.12;}
+  skyTop.setAttribute('stop-color',top);
+  skyBot.setAttribute('stop-color',bot);
+  if(rain)rain.style.display=showRain?'':'none';
+  if(clouds)clouds.style.opacity=cloudOp;
+}
+function updateGlanceWeather(){
+  syncClawdHomeWeather();
+  const el=document.getElementById('glanceWeather');
+  if(!el||!state.weatherData)return;
+  const code=state.weatherData.current?.weathercode??0;
+  const today=state.weatherData.daily;
+  const temp=Math.round(state.weatherData.current?.temperature_2m??0);
+  const hi=today?Math.round(today.temperature_2m_max?.[0]??0):'--';
+  const lo=today?Math.round(today.temperature_2m_min?.[0]??0):'--';
+  const rain=today?(today.precipitation_probability_max?.[0]??0):0;
+  const glyph=WEATHER_GLYPHS[code]||'🌤';
+  el.textContent=rain>=20
+    ?`${glyph} ${temp}° · ${hi}↑ ${lo}↓ · ${rain}%`
+    :`${glyph} ${temp}° · ${hi}↑ ${lo}↓`;
+  el.style.display='block';
 }
 
 /* ═══ WEATHER ANIMATION ENGINE ═══ */
@@ -3386,35 +3739,7 @@ function updateCeClassOptions(){
 /* ═══ TIMETABLE INFO PANEL ═══ */
 function renderTTInfoPanel(){
   const el=document.getElementById('ttInfoPanel');
-  if(!el)return;
-  const week=state.viewWeek;
-  const wkOff=getViewWeekOffset();
-  const now=new Date();
-  const todayStr=toDateStr(now);
-  let html='';
-
-  // Unified upcoming timeline (events + farm merged, sorted by date)
-  const MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  const allUpcoming=[
-    ...(state.events||[]).filter(e=>e.date>=todayStr).map(e=>({date:e.date,name:e.name,tag:'event'})),
-    ...(state.farmDates||[]).filter(e=>e.date>=todayStr).map(e=>({date:e.date,name:e.name,tag:e.category||'farm'}))
-  ].sort((a,b)=>a.date.localeCompare(b.date)).slice(0,6);
-
-  html+=`<div class="tt-info-section"><div class="tt-info-heading">Upcoming</div>`;
-  if(!allUpcoming.length){
-    html+=`<div class="tt-info-empty">Nothing scheduled</div>`;
-  } else {
-    allUpcoming.forEach(e=>{
-      const d=new Date(e.date+'T00:00:00');
-      const diff=Math.round((d-now)/(1000*60*60*24));
-      const when=diff===0?'Today':diff===1?'Tomorrow':`${d.getDate()} ${MONTHS[d.getMonth()]}`;
-      const tagColor=e.tag==='event'?'var(--accent)':'var(--color-ag)';
-      html+=`<div class="tt-info-row"><span class="tt-info-date">${when}</span><span class="tt-info-name">${escHtml(e.name)}</span><span class="tt-info-tag" style="border-color:${tagColor}30;color:${tagColor}">${e.tag}</span></div>`;
-    });
-  }
-  html+=`</div>`;
-
-  el.innerHTML=html;
+  if(el)el.innerHTML='';
 }
 function openClawdRelease(){document.getElementById('clawdReleaseModal').classList.add('open');document.getElementById('drawerOverlay').classList.add('open');}
 function closeClawdRelease(){document.getElementById('clawdReleaseModal').classList.remove('open');document.getElementById('drawerOverlay').classList.remove('open');}
@@ -3601,6 +3926,7 @@ ${duties.length?`<div class="sec"><h2>Duties</h2><ul>${duties.map(x=>`<li>${x}</
 ${urgTasks.length?`<div class="sec" style="margin-top:12px"><h2>Urgent Tasks</h2><ul>${urgTasks.map(x=>`<li>${x}</li>`).join('')}</ul></div>`:''}
 <script>window.print();<\/script></body></html>`);win.document.close();}
 function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000);}
+function refreshDashboard(){fetchWeather();renderBriefing();showToast('Refreshed');}
 function escHtml(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
 function copyStateToClipboard(){
   const d={};for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k.startsWith('ws-'))d[k]=localStorage.getItem(k);}
@@ -3975,6 +4301,13 @@ document.addEventListener('keydown',e=>{
   if(e.key==='Enter'&&ttKbFocus!==null){e.preventDefault();openLessonPanel(state.viewWeek,DAYS[ttKbFocus.di],PERIODS[ttKbFocus.pi],null);}
 });
 
+/* Shift-held → Clawd becomes clickable temporarily */
+(function(){
+  const img=()=>document.getElementById('clawd-pet-img');
+  document.addEventListener('keydown',e=>{if(e.key==='Shift'&&img()){img().style.pointerEvents='auto';img().title='Shift held — click to interact';}});
+  document.addEventListener('keyup',e=>{if(e.key==='Shift'&&img()){img().style.pointerEvents='none';img().title='';}});
+})();
+
 /* ═══ INIT ═══ */
 function init(){
   loadState();
@@ -4008,9 +4341,12 @@ function init(){
   renderRoomsList();renderClassNamesList();renderEvents();renderTTInfoPanel();updatePlanIndicator();renderApiKeyStatus();renderCustomChips();
   const spa=document.getElementById('scratchPadArea');if(spa){spa.value=state.scratchPad||'';saveScratchPad(spa.value);}
 
-  if(state.weatherData){WeatherFX.update(state.weatherData.current?.weathercode??0);}
+  if(state.weatherData){
+    WeatherFX.update(state.weatherData.current?.weathercode??0);
+    updateGlanceWeather();
+  }
 
-  setInterval(updateClock,1000); // clock in its own interval — never disrupted by other render errors
+  setInterval(updateClock,1000);
   setInterval(()=>{updateCountdown();updateTTLiveTimer();updateTimeIndicator();},1000);
   // Clawd event bubble — check every ~3 min, but only fire if Clawd is idle
   setInterval(()=>{
